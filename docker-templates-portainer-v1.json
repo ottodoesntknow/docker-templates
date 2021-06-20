@@ -702,6 +702,12 @@
         "name": "UMASK",
         "default": "!UMASK",
         "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "label": "TP_HOTIO",
+        "description": "Tell theme.park that we are using hotio paths."
       }
     ],
     "logo": "https://hotio.dev/webhook-avatars/radarr.png",
@@ -755,6 +761,12 @@
         "name": "UMASK",
         "default": "!UMASK",
         "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "description": "Tell theme.park that we are using hotio paths.",
+        "label": "TP_HOTIO"
       }
     ],
     "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
