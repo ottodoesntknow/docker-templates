@@ -480,102 +480,13 @@
       "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin-vue/dbf7c4cdc12327c988a4aa336b1d023fb30d5575/client/static/icon.png"
     },
     {
-      "title": "Netdata",
-      "name": "netdata",
-      "image": "netdata/netdata",
-      "description": "Monitor everything in real time. For free.\nTroubleshoot slowdowns and anomalies in your infrastructure with thousands of per-second metrics, meaningful visualizations, and insightful health alarms with zero configuration.",
-      "categories": [
-        "Analytics"
-      ],
-      "platform": "linux",
-      "note": "To obtain PGID_DOCKER value run 'grep docker /etc/group | cut -d ':' -f 3'. <a href='https://www.netdata.cloud'/>Official web</a>.",
-      "restart_policy": "always",
-      "ports": [
-        {
-          "label": "WebUI",
-          "hport": "19999",
-          "cport": "19999",
-          "proto": "tcp"
-        }
-      ],
-      "volumes": [
-        {
-          "container": "/etc/netdata",
-          "bind": "",
-          "variable": "!config/netdata"
-        },
-        {
-          "container": "/var/lib/netdata",
-          "bind": "",
-          "variable": "!config/netdata/lib"
-        },
-        {
-          "container": "/var/cache/netdata",
-          "bind": "",
-          "variable": "!config/netdata/cache"
-        },
-        {
-          "container": "/host/etc/passwd",
-          "bind": "/etc/passwd"
-        },
-        {
-          "container": "/host/etc/group",
-          "bind": "/etc/group"
-        },
-        {
-          "container": "/host/proc",
-          "bind": "/proc"
-        },
-        {
-          "container": "/host/sys",
-          "bind": "/sys"
-        },
-        {
-          "container": "/host/etc/os-release",
-          "bind": "/etc/os-release"
-        },
-        {
-          "container": "/var/run/docker.sock",
-          "bind": "/var/run/docker.sock"
-        }
-      ],
-      "env": [
-        {
-          "name": "PGID",
-          "default": "!PGID_DOCKER",
-          "label": "PGID",
-          "description": "Group assigned to the docker socket."
-        }
-      ],
-      "command": [],
-      "devices": [],
-      "labels": [
-        {
-          "label": "security_opt",
-          "value": "apparmor:unconfined",
-          "variable": ""
-        },
-        {
-          "label": "hostname",
-          "value": "oscar-server",
-          "variable": ""
-        }
-      ],
-      "sysctls": [],
-      "cap_add": [
-        "SYS_PTRACE"
-      ],
-      "logo": "https://raw.githubusercontent.com/netdata/netdata/3aa4556baf8937088f2d236a8cd79cdd6512aaa4/web/gui/images/netdata-logomark.svg"
-    },
-    {
       "title": "Notifiarr",
       "name": "notifiarr",
       "image": "golift/notifiarr",
       "description": "This is the unified client for Notifiarr.com. The client enables content requests from Media Bot in your Discord Server. It also provides reports for Plex usage and system health.",
       "categories": [
         "Movies",
-        "TV",
-        "Analytics"
+        "TV"
       ],
       "platform": "linux",
       "note": "<a href='https://github.com/Notifiarr/notifiarr'/>Official web</a>.",
@@ -593,30 +504,12 @@
           "container": "/config",
           "bind": "",
           "variable": "!config/notifiarr"
-        },
-        {
-          "container": "/var/run/utmp",
-          "bind": "/var/run/utmp"
-        },
-        {
-          "container": "/dev",
-          "bind": "/dev"
-        },
-        {
-          "container": "/mnt",
-          "bind": "/mnt"
         }
       ],
       "env": [],
       "command": [],
       "devices": [],
-      "labels": [
-        {
-          "label": "privileged",
-          "value": "true",
-          "variable": ""
-        }
-      ],
+      "labels": [],
       "sysctls": [],
       "cap_add": [],
       "logo": "https://raw.githubusercontent.com/Go-Lift-TV/discordnotifier-client/main/init/windows/application.ico"
