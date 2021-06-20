@@ -1,0 +1,1058 @@
+[
+  {
+    "title": "Bazarr",
+    "name": "bazarr",
+    "image": "hotio/bazarr:nightly",
+    "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.",
+    "categories": [
+      "Subtitles"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://www.bazarr.media'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "6767:6767/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/media",
+        "bind": "!media"
+      },
+      {
+        "container": "/config",
+        "bind": "!config/bazarr"
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": "!theme.park/bazarr/root/etc/cont-init.d/98-themepark"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "label": "TP_HOTIO",
+        "description": "Tell theme.park that we are using hotio paths."
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/bazarr.png"
+  },
+  {
+    "title": "Deemix",
+    "name": "deemix",
+    "image": "registry.gitlab.com/bockiii/deemix-docker",
+    "description": "deemix (lowercase) is a barebone deezer downloader library built from the ashes of Deezloader Remix.",
+    "categories": [
+      "Music"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://deemix.app'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "6595:6595/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/deemix"
+      },
+      {
+        "container": "/downloads",
+        "bind": "!media/downloads/music"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK_SET",
+        "default": "!UMASK",
+        "label": "UMASK_SET"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://styles.redditmedia.com/t5_2kobvw/styles/communityIcon_e23pfk9fwv451.png"
+  },
+  {
+    "title": "Filebrowser",
+    "name": "filebrowser",
+    "image": "filebrowser/filebrowser",
+    "description": "filebrowser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
+    "categories": [
+      "Files"
+    ],
+    "platform": "linux",
+    "note": "The default user and password is admin/admin. To ensure the DB containing your login persists through a rebuild, create a filebrowser.db file in the !config/filebrowser container folder. <a href='https://filebrowser.org'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      {
+        "WebUI": "8888:80/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/srv",
+        "bind": "!home"
+      },
+      {
+        "container": "/srv/docker/volumes",
+        "bind": "/var/lib/docker/volumes"
+      },
+      {
+        "container": "/database.db",
+        "bind": "!config/filebrowser/filebrowser.db"
+      }
+    ],
+    "env": [],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg"
+  },
+  {
+    "title": "FlexGet",
+    "name": "flexget",
+    "image": "cpoppema/docker-flexget",
+    "description": "FlexGet is a multipurpose automation tool for all of your media.\nSupport for torrents, nzbs, podcasts, comics, TV, movies, RSS, HTML, CSV, and more.",
+    "categories": [],
+    "platform": "linux",
+    "note": "The default user is flexget. You need to specify a password. <a href='https://flexget.com'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "5050:5050/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/flexget"
+      },
+      {
+        "container": "/media",
+        "bind": "!media"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "WEB_PASSWD",
+        "default": "",
+        "label": "WEB_PASSWD"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/Flexget/Flexget/97ca6d2219c43f723be67bfb7ef2021dbe3c1f72/flexget/resources/flexget.png"
+  },
+  {
+    "title": "Jackett",
+    "name": "jackett",
+    "image": "hotio/jackett:testing",
+    "description": "Jackett works as a proxy server: it translates queries from apps (Sonarr, Radarr, SickRage, CouchPotato, Mylar, Lidarr, DuckieTV, qBittorrent, Nefarious etc.) into tracker-site-specific http queries, parses the html response, then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches.",
+    "categories": [
+      "Torrents"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://github.com/Jackett/Jackett'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "9117:9117/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/jackett"
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": "!theme.park/jackett/root/etc/cont-init.d/98-themepark"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "label": "TP_HOTIO",
+        "description": "Tell theme.park that we are using hotio paths."
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/jackett.png"
+  },
+  {
+    "title": "JDownloader",
+    "name": "jdownloader",
+    "image": "jaymoulin/jdownloader",
+    "description": "JDownloader is a free, open-source download management tool with a huge community of developers that makes downloading as easy and fast as it should be. Users can start, stop or pause downloads, set bandwith limitations, auto-extract archives and much more. It's an easy-to-extend framework that can save hours of your valuable time every day!",
+    "categories": [
+      "Downloads"
+    ],
+    "platform": "linux",
+    "note": "You can control this container via <a href='https://my.jdownloader.org'/>MyJDownloader</a>.<a href='https://jdownloader.org'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "Direct Connection": "3129:3129/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/opt/JDownloader/cfg",
+        "bind": "!config/jdownloader"
+      },
+      {
+        "container": "/opt/JDownloader/Downloads",
+        "bind": "!media/downloads"
+      },
+      {
+        "container": "/etc/localtime",
+        "bind": "/etc/localtime"
+      }
+    ],
+    "env": [
+      {
+        "name": "USER_ID",
+        "default": "!PUID",
+        "label": "USER_ID"
+      },
+      {
+        "name": "GROUP_ID",
+        "default": "!PGID",
+        "label": "GROUP_ID"
+      },
+      {
+        "name": "MYJD_USER",
+        "default": "",
+        "label": "MYJD_USER"
+      },
+      {
+        "name": "MYJD_PASSWORD",
+        "default": "",
+        "label": "MYJD_PASSWORD"
+      },
+      {
+        "name": "MYJD_DEVICE_NAME",
+        "default": "",
+        "label": "MYJD_DEVICE_NAME"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://jdownloader.org/_media/knowledge/wiki/jdownloader.png"
+  },
+  {
+    "title": "Jellyfin",
+    "name": "jellyfin",
+    "image": "hotio/jellyfin",
+    "description": "Jellyfin is the volunteer-built media solution that puts you in control of your media. Stream to any device from your own server, with no strings attached. Your media, your server, your way.",
+    "categories": [
+      "Movies",
+      "TV"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://jellyfin.org'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "8096:8096/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/jellyfin"
+      },
+      {
+        "container": "/media",
+        "bind": "!media"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/jellyfin.png"
+  },
+  {
+    "title": "Jellyfin Vue",
+    "name": "jellyfin-vue",
+    "image": "jellyfin/jellyfin-vue:unstable",
+    "description": "This is an experimental web client for Jellyfin based on Vue.js.",
+    "categories": [
+      "Movies",
+      "TV"
+    ],
+    "platform": "linux",
+    "note": "Remember, this is an experimental client, some features may not work properly. <a href='https://github.com/jellyfin/jellyfin-vue'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "8097:80/tcp"
+      }
+    ],
+    "volumes": [],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin-vue/dbf7c4cdc12327c988a4aa336b1d023fb30d5575/client/static/icon.png"
+  },
+  {
+    "title": "Netdata",
+    "name": "netdata",
+    "image": "netdata/netdata",
+    "description": "Monitor everything in real time. For free.\nTroubleshoot slowdowns and anomalies in your infrastructure with thousands of per-second metrics, meaningful visualizations, and insightful health alarms with zero configuration.",
+    "categories": [
+      "Analytics"
+    ],
+    "platform": "linux",
+    "note": "To obtain PGID_DOCKER value run 'grep docker /etc/group | cut -d ':' -f 3'. <a href='https://www.netdata.cloud'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      {
+        "WebUI": "19999:19999/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/etc/netdata",
+        "bind": "!config/netdata"
+      },
+      {
+        "container": "/var/lib/netdata",
+        "bind": "!config/netdata/lib"
+      },
+      {
+        "container": "/var/cache/netdata",
+        "bind": "!config/netdata/cache"
+      },
+      {
+        "container": "/host/etc/passwd",
+        "bind": "/etc/passwd"
+      },
+      {
+        "container": "/host/etc/group",
+        "bind": "/etc/group"
+      },
+      {
+        "container": "/host/proc",
+        "bind": "/proc"
+      },
+      {
+        "container": "/host/sys",
+        "bind": "/sys"
+      },
+      {
+        "container": "/host/etc/os-release",
+        "bind": "/etc/os-release"
+      },
+      {
+        "container": "/var/run/docker.sock",
+        "bind": "/var/run/docker.sock"
+      }
+    ],
+    "env": [
+      {
+        "name": "PGID",
+        "default": "!PGID_DOCKER",
+        "label": "PGID",
+        "description": "Group assigned to the docker socket."
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [
+      {
+        "label": "security_opt",
+        "value": "apparmor:unconfined",
+        "variable": ""
+      },
+      {
+        "label": "hostname",
+        "value": "oscar-server",
+        "variable": ""
+      }
+    ],
+    "sysctls": [],
+    "cap_add": [
+      "SYS_PTRACE"
+    ],
+    "logo": "https://raw.githubusercontent.com/netdata/netdata/3aa4556baf8937088f2d236a8cd79cdd6512aaa4/web/gui/images/netdata-logomark.svg"
+  },
+  {
+    "title": "Notifiarr",
+    "name": "notifiarr",
+    "image": "golift/notifiarr",
+    "description": "This is the unified client for Notifiarr.com. The client enables content requests from Media Bot in your Discord Server. It also provides reports for Plex usage and system health.",
+    "categories": [
+      "Movies",
+      "TV",
+      "Analytics"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://github.com/Notifiarr/notifiarr'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      {
+        "Connection": "5454:5454/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/notifiarr"
+      },
+      {
+        "container": "/var/run/utmp",
+        "bind": "/var/run/utmp"
+      },
+      {
+        "container": "/dev",
+        "bind": "/dev"
+      },
+      {
+        "container": "/mnt",
+        "bind": "/mnt"
+      }
+    ],
+    "env": [],
+    "command": [],
+    "devices": [],
+    "labels": [
+      {
+        "label": "privileged",
+        "value": "true",
+        "variable": ""
+      }
+    ],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/Go-Lift-TV/discordnotifier-client/main/init/windows/application.ico"
+  },
+  {
+    "title": "Organizr",
+    "name": "organizr",
+    "image": "organizr/organizr",
+    "description": "Do not wait — Forget bookmarks now\ntake the plunge now and ditch your old landing page",
+    "categories": [
+      "Dashboard"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://organizr.app'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      {
+        "WebUI": "80:80/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/organizr"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "branch",
+        "default": "v2-develop",
+        "label": "branch",
+        "description": "Used to switched between branches of organizr."
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/favicon/android-chrome-512x512.png"
+  },
+  {
+    "title": "Prowlarr",
+    "name": "prowlarr",
+    "image": "hotio/prowlarr:testing",
+    "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
+    "categories": [
+      "Torrents"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://prowlarr.com'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "9696:9696/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/prowlarr"
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": "!theme.park/prowlarr/root/etc/cont-init.d/98-themepark"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "description": "Tell theme.park that we are using hotio paths.",
+        "label": "TP_HOTIO"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/prowlarr.png"
+  },
+  {
+    "title": "qBittorrent",
+    "name": "qbittorrent",
+    "image": "hotio/qbittorrent",
+    "description": "The qBittorrent project aims to provide an open-source software alternative to µTorrent.",
+    "categories": [
+      "Torrents"
+    ],
+    "platform": "linux",
+    "note": "You can use the alternative Web UI VueTorrent in /app/vuetorrent. <a href='https://www.qbittorrent.org'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "8080:8080/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/qbittorrent"
+      },
+      {
+        "container": "/media/downloads",
+        "bind": "!media/downloads"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/qbittorrent.png"
+  },
+  {
+    "title": "Radarr",
+    "name": "radarr",
+    "image": "hotio/radarr:testing",
+    "description": "Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.",
+    "categories": [
+      "Movies"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://radarr.video'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "7878:7878/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/radarr"
+      },
+      {
+        "container": "/media",
+        "bind": "!media"
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": "!theme.park/radarr/root/etc/cont-init.d/98-themepark"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/radarr.png"
+  },
+  {
+    "title": "Sonarr",
+    "name": "sonarr",
+    "image": "hotio/sonarr",
+    "description": "Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
+    "categories": [
+      "TV"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://sonarr.tv'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "8989:8989/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/sonarr"
+      },
+      {
+        "container": "/media",
+        "bind": "!media"
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": "!theme.park/sonarr/root/etc/cont-init.d/98-themepark"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/sonarr.png"
+  },
+  {
+    "title": "Unpackerr",
+    "name": "unpackerr",
+    "image": "hotio/unpackerr:testing",
+    "description": "This application runs as a daemon on your download host. It checks for completed downloads and extracts them so Radarr, Lidarr, Sonarr, and Readarr may import them.",
+    "categories": [
+      "Torrents"
+    ],
+    "platform": "linux",
+    "note": "You can configure it (with *arr APIs, etc) in the unpackerr.conf file in the !config/unpackerrr container folder. <a href='https://github.com/davidnewhall/unpackerr'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/unpackerr"
+      },
+      {
+        "container": "/media/downloads",
+        "bind": "!media/downloads"
+      },
+      {
+        "container": "/etc/unpackerr/unpackerr.conf",
+        "bind": "!config/unpackerr/unpackerr.conf"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://hotio.dev/webhook-avatars/unpackerr.png"
+  },
+  {
+    "title": "Watchtower",
+    "name": "watchtower",
+    "image": "containrrr/watchtower",
+    "description": "A process for automating Docker container base image updates.",
+    "categories": [
+      "Updates"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://containrrr.dev/watchtower'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [],
+    "volumes": [
+      {
+        "container": "/var/run/docker.sock",
+        "bind": "/var/run/docker.sock"
+      }
+    ],
+    "env": [
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "WATCHTOWER_CLEANUP",
+        "default": "true",
+        "label": "WATCHTOWER_CLEANUP",
+        "description": "Removes old images after updating."
+      },
+      {
+        "name": "WATCHTOWER_DEBUG",
+        "default": "true",
+        "label": "WATCHTOWER_DEBUG",
+        "description": "Enable debug mode with verbose logging."
+      },
+      {
+        "name": "WATCHTOWER_INCLUDE_STOPPED",
+        "default": "true",
+        "label": "WATCHTOWER_INCLUDE_STOPPED",
+        "description": "Will also include created and exited containers."
+      },
+      {
+        "name": "WATCHTOWER_POLL_INTERVAL",
+        "default": "3600",
+        "label": "WATCHTOWER_POLL_INTERVAL",
+        "description": "Poll interval (in seconds = 1 hour)."
+      },
+      {
+        "name": "WATCHTOWER_NOTIFICATIONS",
+        "default": "shoutrrr",
+        "label": "WATCHTOWER_NOTIFICATIONS",
+        "description": "Send notifications via containrrr/shoutrrr."
+      },
+      {
+        "name": "WATCHTOWER_NOTIFICATION_URL",
+        "default": "",
+        "label": "WATCHTOWER_NOTIFICATION_URL",
+        "description": "The shoutrrr service URL to be used."
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/containrrr/watchtower/29f5c4b254a686d9198277a78f5066666240f0e0/logo.png"
+  },
+  {
+    "title": "WireGuard",
+    "name": "wireguard",
+    "image": "linuxserver/wireguard",
+    "description": "WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. ",
+    "categories": [
+      "VPN"
+    ],
+    "platform": "linux",
+    "note": "The peer/client config qr codes will be output in the docker log. They will also be saved in text and png format under /config/peerX in case PEERS is a variable and an integer or /config/peer_X in case a list of names was provided instead of an integer. Make sure to make port 51820 public if accessing remotely. <a href='https://www.wireguard.com'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      {
+        "WireGuard port": "51820:51820/udp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/wireguard"
+      },
+      {
+        "container": "/lib/modules",
+        "bind": "/lib/modules"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "SERVERURL",
+        "default": "auto",
+        "label": "SERVERURL",
+        "description": "External IP or domain name for docker host. "
+      },
+      {
+        "name": "SERVERPORT",
+        "default": "51820",
+        "label": "SERVERPORT",
+        "description": " External port for docker host."
+      },
+      {
+        "name": "PEERS",
+        "default": "",
+        "label": "PEERS",
+        "description": "Number or list of names of peers to create confs for."
+      },
+      {
+        "name": "INTERNAL_SUBNET",
+        "default": "10.13.13.0",
+        "description": " Internal subnet for the wireguard and server and peers (only change if it clashes).",
+        "label": "INTERNAL_SUBNET"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [
+      {
+        "net.ipv4.conf.all.src_valid_mark": "1"
+      }
+    ],
+    "cap_add": [
+      "NET_ADMIN",
+      "SYS_MODULE"
+    ],
+    "logo": "https://www.wireguard.com/favicon.ico"
+  }
+]
