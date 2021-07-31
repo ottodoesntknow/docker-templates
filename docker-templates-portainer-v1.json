@@ -570,6 +570,65 @@
     "type": 1
   },
   {
+    "title": "Readarr",
+    "name": "readarr",
+    "image": "hotio/readarr:nightly",
+    "description": "Readarr is an ebook (and maybe eventually magazine/audiobook) collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new books from your favorite authors and will grab, sort and rename them.",
+    "categories": [
+      "Books"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://readarr.com'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      "8787:8787/tcp"
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": ""
+      },
+      {
+        "container": "/media",
+        "bind": ""
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": ""
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "description": "Tell theme.park that we are using hotio paths.",
+        "label": "TP_HOTIO"
+      }
+    ],
+    "logo": "https://hotio.dev/webhook-avatars/readarr.png",
+    "type": 1
+  },
+  {
     "title": "Sonarr",
     "name": "sonarr",
     "image": "hotio/sonarr",
