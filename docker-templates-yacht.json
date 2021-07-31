@@ -158,59 +158,6 @@
     "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg"
   },
   {
-    "title": "FlexGet",
-    "name": "flexget",
-    "image": "cpoppema/docker-flexget",
-    "description": "FlexGet is a multipurpose automation tool for all of your media.\nSupport for torrents, nzbs, podcasts, comics, TV, movies, RSS, HTML, CSV, and more.",
-    "categories": [],
-    "platform": "linux",
-    "note": "The default user is flexget. You need to specify a password. <a href='https://flexget.com'/>Official web</a>.",
-    "restart_policy": "unless-stopped",
-    "ports": [
-      {
-        "WebUI": "5050:5050/tcp"
-      }
-    ],
-    "volumes": [
-      {
-        "container": "/config",
-        "bind": "!config/flexget"
-      },
-      {
-        "container": "/media",
-        "bind": "!media"
-      }
-    ],
-    "env": [
-      {
-        "name": "PUID",
-        "default": "!PUID",
-        "label": "PUID"
-      },
-      {
-        "name": "PGID",
-        "default": "!PGID",
-        "label": "PGID"
-      },
-      {
-        "name": "TZ",
-        "default": "!TZ",
-        "label": "TZ"
-      },
-      {
-        "name": "WEB_PASSWD",
-        "default": "",
-        "label": "WEB_PASSWD"
-      }
-    ],
-    "command": [],
-    "devices": [],
-    "labels": [],
-    "sysctls": [],
-    "cap_add": [],
-    "logo": "https://raw.githubusercontent.com/Flexget/Flexget/97ca6d2219c43f723be67bfb7ef2021dbe3c1f72/flexget/resources/flexget.png"
-  },
-  {
     "title": "Jackett",
     "name": "jackett",
     "image": "hotio/jackett:testing",
@@ -519,7 +466,7 @@
   {
     "title": "Prowlarr",
     "name": "prowlarr",
-    "image": "hotio/prowlarr:testing",
+    "image": "hotio/prowlarr:nightly",
     "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
     "categories": [
       "Torrents"
