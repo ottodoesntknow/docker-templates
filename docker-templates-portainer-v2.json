@@ -2,6 +2,95 @@
     "version": "2",
     "templates": [
         {
+            "title": "AMTD",
+            "name": "amtd",
+            "image": "randomninjaatk/amtd",
+            "description": "Automated Movie Trailer Downloader is a Radarr companion script to automatically download movie trailers and extras for use in other video applications (plex/kodi/jellyfin/emby)",
+            "categories": [
+                "Movies"
+            ],
+            "platform": "linux",
+            "note": "<a href='https://github.com/RandomNinjaAtk/docker-amtd'/>Official web</a>.",
+            "restart_policy": "unless-stopped",
+            "volumes": [
+                {
+                    "container": "/config",
+                    "bind": ""
+                },
+                {
+                    "container": "/media",
+                    "bind": ""
+                }
+            ],
+            "env": [
+                {
+                    "name": "PUID",
+                    "default": "!PUID",
+                    "label": "PUID"
+                },
+                {
+                    "name": "PGID",
+                    "default": "!PGID",
+                    "label": "PGID"
+                },
+                {
+                    "name": "AUTOSTART",
+                    "default": "true",
+                    "label": "AUTOSTART",
+                    "description": "Runs script automatically on startup"
+                },
+                {
+                    "name": "SCRIPTINTERVAL",
+                    "default": "1d",
+                    "label": "SCRIPTINTERVAL",
+                    "description": "Amount of time between each script run, when AUTOSTART is enabled"
+                },
+                {
+                    "name": "RadarrUrl",
+                    "default": "",
+                    "label": "RadarrUrl",
+                    "description": "Set domain or IP to your Radarr instance including port."
+                },
+                {
+                    "name": "RadarrAPIkey",
+                    "default": "",
+                    "label": "RadarrAPIkey"
+                },
+                {
+                    "name": "extrastype",
+                    "default": "all",
+                    "label": "extrastype",
+                    "description": "all downloads all available videos (trailers, clips, featurette, etc...), trailers only downloads trailers"
+                },
+                {
+                    "name": "LANGUAGES",
+                    "default": "es,en",
+                    "label": "LANGUAGES",
+                    "description": "Set the primary desired language, if not found, fallback to next language in the list... (this is a \",\" separated list of ISO 639-1 language codes)"
+                },
+                {
+                    "name": "USEFOLDERS",
+                    "default": "true",
+                    "label": "USEFOLDERS",
+                    "description": "Creates subfolders within the movie folder for extras"
+                },
+                {
+                    "name": "SINGLETRAILER",
+                    "default": "false",
+                    "label": "SINGLETRAILER",
+                    "description": "Only downloads the first available trailer, does not apply to other extras type"
+                },
+                {
+                    "name": "subtitlelanguage",
+                    "default": "es,en",
+                    "label": "subtitlelanguage",
+                    "description": "Desired Language Code"
+                }
+            ],
+            "logo": "https://raw.githubusercontent.com/RandomNinjaAtk/unraid-templates/master/randomninjaatk/img/amtd.png",
+            "type": 1
+        },
+        {
             "title": "Bazarr",
             "name": "bazarr",
             "image": "hotio/bazarr:nightly",
@@ -877,95 +966,6 @@
                 "SYS_MODULE"
             ],
             "logo": "https://www.wireguard.com/favicon.ico",
-            "type": 1
-        },
-        {
-            "title": "AMTD",
-            "name": "amtd",
-            "image": "randomninjaatk/amtd",
-            "description": "Automated Movie Trailer Downloader is a Radarr companion script to automatically download movie trailers and extras for use in other video applications (plex/kodi/jellyfin/emby)",
-            "categories": [
-                "Movies"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://github.com/RandomNinjaAtk/docker-amtd'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "AUTOSTART",
-                    "default": "true",
-                    "label": "AUTOSTART",
-                    "description": "Runs script automatically on startup"
-                },
-                {
-                    "name": "SCRIPTINTERVAL",
-                    "default": "1d",
-                    "label": "SCRIPTINTERVAL",
-                    "description": "Amount of time between each script run, when AUTOSTART is enabled"
-                },
-                {
-                    "name": "RadarrUrl",
-                    "default": "",
-                    "label": "RadarrUrl",
-                    "description": "Set domain or IP to your Radarr instance including port."
-                },
-                {
-                    "name": "RadarrAPIkey",
-                    "default": "",
-                    "label": "RadarrAPIkey"
-                },
-                {
-                    "name": "extrastype",
-                    "default": "all",
-                    "label": "extrastype",
-                    "description": "all downloads all available videos (trailers, clips, featurette, etc...), trailers only downloads trailers"
-                },
-                {
-                    "name": "LANGUAGES",
-                    "default": "es,en",
-                    "label": "LANGUAGES",
-                    "description": "Set the primary desired language, if not found, fallback to next language in the list... (this is a \",\" separated list of ISO 639-1 language codes)"
-                },
-                {
-                    "name": "USEFOLDERS",
-                    "default": "true",
-                    "label": "USEFOLDERS",
-                    "description": "Creates subfolders within the movie folder for extras"
-                },
-                {
-                    "name": "SINGLETRAILER",
-                    "default": "false",
-                    "label": "SINGLETRAILER",
-                    "description": "Only downloads the first available trailer, does not apply to other extras type"
-                },
-                {
-                    "name": "subtitlelanguage",
-                    "default": "es,en",
-                    "label": "subtitlelanguage",
-                    "description": "Desired Language Code"
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/RandomNinjaAtk/unraid-templates/master/randomninjaatk/img/amtd.png",
             "type": 1
         }
     ]
