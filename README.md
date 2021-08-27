@@ -22,3 +22,17 @@ docker run -d --name=netdata \
   --security-opt apparmor=unconfined \
   netdata/netdata
 ```
+
+To install telegram-download-daemon:
+```bash
+docker run --name=telegram-download-daemon \
+  -v /var/lib/docker/volumes/config/telegram-download-daemon:/config \
+  -v /home/oscar/media/downloads/telegram:/downloads \
+  -e "TELEGRAM_DAEMON_API_ID=API_ID" \
+  -e "TELEGRAM_DAEMON_API_HASH=API_HASH" \
+  -e "TELEGRAM_DAEMON_CHANNEL=CHANNEL_ID" \
+  -e "TELEGRAM_DAEMON_DEST=/downloads" \
+  -e "TELEGRAM_DAEMON_SESSION_PATH=/config" \
+  --restart unless-stopped \
+  alfem/telegram-download-daemon
+```
