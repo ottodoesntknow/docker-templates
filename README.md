@@ -1,6 +1,17 @@
 # docker-templates
 Docker Templates
 
+To install Notifiarr:
+```bash
+docker run -d --name=notifiarr \
+  -h=oscar-server \
+  -l local.notifiarr.port.19999=Connection \
+  -p 5454:5454 \
+  -v /var/lib/docker/volumes/config/notifiarr:/config \
+  --restart always \
+  golift/notifiarr
+```
+
 To install Netdata:
 ```bash
 docker run -d --name=netdata \
