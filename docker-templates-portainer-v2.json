@@ -433,30 +433,6 @@
             "type": 1
         },
         {
-            "title": "Notifiarr",
-            "name": "notifiarr",
-            "image": "golift/notifiarr",
-            "description": "This is the unified client for Notifiarr.com. The client enables content requests from Media Bot in your Discord Server. It also provides reports for Plex usage and system health.",
-            "categories": [
-                "Movies",
-                "TV"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://github.com/Notifiarr/notifiarr'/>Official web</a>.",
-            "restart_policy": "always",
-            "ports": [
-                "5454:5454/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/Go-Lift-TV/discordnotifier-client/main/init/windows/application.ico",
-            "type": 1
-        },
-        {
             "title": "Organizr",
             "name": "organizr",
             "image": "organizr/organizr",
