@@ -635,6 +635,72 @@
       "logo": "https://hotio.dev/webhook-avatars/prowlarr.png"
     },
     {
+      "title": "pyLoad",
+      "name": "pyload",
+      "image": "linuxserver/pyload",
+      "description": "Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.",
+      "categories": [
+        "Downloads"
+      ],
+      "platform": "linux",
+      "note": "<a href='https://pyload.net'/>Official web</a>.",
+      "restart_policy": "unless-stopped",
+      "ports": [
+        {
+          "label": "WebUI",
+          "hport": "8001",
+          "cport": "8000",
+          "proto": "tcp"
+        },
+        {
+          "label": "pyLoad control",
+          "hport": "7227",
+          "cport": "7227",
+          "proto": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/config",
+          "bind": "",
+          "variable": "!config/pyload"
+        },
+        {
+          "container": "/downloads",
+          "bind": "",
+          "variable": "!media/downloads"
+        }
+      ],
+      "env": [
+        {
+          "name": "PUID",
+          "default": "!PUID",
+          "label": "PUID"
+        },
+        {
+          "name": "PGID",
+          "default": "!PGID",
+          "label": "PGID"
+        },
+        {
+          "name": "TZ",
+          "default": "!TZ",
+          "label": "TZ"
+        },
+        {
+          "name": "UMASK",
+          "default": "!UMASK",
+          "label": "UMASK"
+        }
+      ],
+      "command": [],
+      "devices": [],
+      "labels": [],
+      "sysctls": [],
+      "cap_add": [],
+      "logo": "https://raw.githubusercontent.com/pyload/pyload/main/media/logo.svg"
+    },
+    {
       "title": "qBittorrent",
       "name": "qbittorrent",
       "image": "hotio/qbittorrent",

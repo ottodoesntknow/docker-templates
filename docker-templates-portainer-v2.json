@@ -529,6 +529,56 @@
             "type": 1
         },
         {
+            "title": "pyLoad",
+            "name": "pyload",
+            "image": "linuxserver/pyload",
+            "description": "Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.",
+            "categories": [
+                "Downloads"
+            ],
+            "platform": "linux",
+            "note": "<a href='https://pyload.net'/>Official web</a>.",
+            "restart_policy": "unless-stopped",
+            "ports": [
+                "8001:8000/tcp",
+                "7227:7227/tcp"
+            ],
+            "volumes": [
+                {
+                    "container": "/config",
+                    "bind": ""
+                },
+                {
+                    "container": "/downloads",
+                    "bind": ""
+                }
+            ],
+            "env": [
+                {
+                    "name": "PUID",
+                    "default": "!PUID",
+                    "label": "PUID"
+                },
+                {
+                    "name": "PGID",
+                    "default": "!PGID",
+                    "label": "PGID"
+                },
+                {
+                    "name": "TZ",
+                    "default": "!TZ",
+                    "label": "TZ"
+                },
+                {
+                    "name": "UMASK",
+                    "default": "!UMASK",
+                    "label": "UMASK"
+                }
+            ],
+            "logo": "https://raw.githubusercontent.com/pyload/pyload/main/media/logo.svg",
+            "type": 1
+        },
+        {
             "title": "qBittorrent",
             "name": "qbittorrent",
             "image": "hotio/qbittorrent",
