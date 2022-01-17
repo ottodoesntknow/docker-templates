@@ -480,6 +480,62 @@
     "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin-vue/dbf7c4cdc12327c988a4aa336b1d023fb30d5575/client/static/icon.png"
   },
   {
+    "title": "Ombi",
+    "name": "ombi",
+    "image": "hotio/ombi:testing",
+    "description": "Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves!",
+    "categories": [
+      "Movies",
+      "TV"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://ombi.io/'/>Official web</a>.",
+    "restart_policy": "unless-stopped",
+    "ports": [
+      {
+        "WebUI": "5000:5000/tcp"
+      }
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": "!config/ombi"
+      },
+      {
+        "container": "/media",
+        "bind": "!media"
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "UMASK",
+        "default": "!UMASK",
+        "label": "UMASK"
+      }
+    ],
+    "command": [],
+    "devices": [],
+    "labels": [],
+    "sysctls": [],
+    "cap_add": [],
+    "logo": "https://raw.githubusercontent.com/Ombi-app/Ombi/develop/src/Ombi/wwwroot/images/favicon/android-chrome-512x512.png"
+  },
+  {
     "title": "Organizr",
     "name": "organizr",
     "image": "organizr/organizr",
@@ -525,58 +581,6 @@
     "sysctls": [],
     "cap_add": [],
     "logo": "https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/favicon/android-chrome-512x512.png"
-  },
-  {
-    "title": "Overseerr",
-    "name": "overseerr",
-    "image": "hotio/overseerr",
-    "description": "Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.",
-    "categories": [
-      "Movies",
-      "TV"
-    ],
-    "platform": "linux",
-    "note": "<a href='https://overseerr.dev'/>Official web</a>.",
-    "restart_policy": "unless-stopped",
-    "ports": [
-      {
-        "WebUI": "5055:5055/tcp"
-      }
-    ],
-    "volumes": [
-      {
-        "container": "/config",
-        "bind": "!config/overseerr"
-      }
-    ],
-    "env": [
-      {
-        "name": "PUID",
-        "default": "!PUID",
-        "label": "PUID"
-      },
-      {
-        "name": "PGID",
-        "default": "!PGID",
-        "label": "PGID"
-      },
-      {
-        "name": "TZ",
-        "default": "!TZ",
-        "label": "TZ"
-      },
-      {
-        "name": "UMASK",
-        "default": "!UMASK",
-        "label": "UMASK"
-      }
-    ],
-    "command": [],
-    "devices": [],
-    "labels": [],
-    "sysctls": [],
-    "cap_add": [],
-    "logo": "https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg"
   },
   {
     "title": "Prowlarr",
