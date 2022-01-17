@@ -474,6 +474,52 @@
             "type": 1
         },
         {
+            "title": "Overseerr",
+            "name": "overseerr",
+            "image": "hotio/overseerr",
+            "description": "Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.",
+            "categories": [
+                "Movies",
+                "TV"
+            ],
+            "platform": "linux",
+            "note": "<a href='https://overseerr.dev'/>Official web</a>.",
+            "restart_policy": "unless-stopped",
+            "ports": [
+                "5055:5055/tcp"
+            ],
+            "volumes": [
+                {
+                    "container": "/config",
+                    "bind": ""
+                }
+            ],
+            "env": [
+                {
+                    "name": "PUID",
+                    "default": "!PUID",
+                    "label": "PUID"
+                },
+                {
+                    "name": "PGID",
+                    "default": "!PGID",
+                    "label": "PGID"
+                },
+                {
+                    "name": "TZ",
+                    "default": "!TZ",
+                    "label": "TZ"
+                },
+                {
+                    "name": "UMASK",
+                    "default": "!UMASK",
+                    "label": "UMASK"
+                }
+            ],
+            "logo": "https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg",
+            "type": 1
+        },
+        {
             "title": "Prowlarr",
             "name": "prowlarr",
             "image": "hotio/prowlarr:nightly",
@@ -802,50 +848,6 @@
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
-            "type": 1
-        },
-        {
-            "title": "tgcf",
-            "name": "tgcf",
-            "image": "aahnik/tgcf",
-            "description": "The ultimate tool to automate custom telegram message forwarding.",
-            "categories": [
-                "Telegram"
-            ],
-            "platform": "linux",
-            "note": "Obtain API_ID and API_HASH <a href='https://my.telegram.org'/>here</a>. More info about SESSION_STRING <a href='https://github.com/aahnik/tgcf/wiki/Login-with-a-bot-or-user-account#generate-session-string'/>here</a>.<a href='https://github.com/aahnik/tgcf'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "volumes": [
-                {
-                    "container": "/app/tgcf.config.yml",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "API_ID",
-                    "default": "",
-                    "label": "API_ID",
-                    "description": ""
-                },
-                {
-                    "name": "API_HASH",
-                    "default": "",
-                    "label": "API_HASH"
-                },
-                {
-                    "name": "TGCF_MODE",
-                    "default": "",
-                    "label": "TGCF_MODE",
-                    "description": "past or live"
-                },
-                {
-                    "name": "SESSION_STRING",
-                    "default": "",
-                    "label": "SESSION_STRING"
-                }
-            ],
-            "logo": "https://user-images.githubusercontent.com/66209958/115183360-3fa4d500-a0f9-11eb-9c0f-c5ed03a9ae17.png",
             "type": 1
         },
         {
