@@ -1026,7 +1026,7 @@
         "Https port": "443:443/tcp"
       },
       {
-        "Http port (required for http validation and http -> https redirect)": "80:80/tcp"
+        "Http port": "80:80/tcp"
       }
     ],
     "volumes": [

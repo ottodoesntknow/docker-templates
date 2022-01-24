@@ -1113,7 +1113,7 @@
           "proto": "tcp"
         },
         {
-          "label": "Http port (required for http validation and http -> https redirect)",
+          "label": "Http port",
           "hport": "80",
           "cport": "80",
           "proto": "tcp"
