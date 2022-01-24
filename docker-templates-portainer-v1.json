@@ -197,6 +197,60 @@
     "type": 1
   },
   {
+    "title": "Duck DNS",
+    "name": "duckdns",
+    "image": "linuxserver/duckdns",
+    "description": "​Duckdns is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.",
+    "categories": [
+      "DNS"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://www.duckdns.org'/>Official web</a>.",
+    "restart_policy": "always",
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": ""
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "SUBDOMAINS",
+        "default": "",
+        "label": "SUBDOMAINS",
+        "description": "multiple subdomains allowed, comma separated, no spaces"
+      },
+      {
+        "name": "TOKEN",
+        "default": "",
+        "label": "TOKEN",
+        "description": "DuckDNS token"
+      },
+      {
+        "name": "LOG_FILE",
+        "default": "true",
+        "label": "LOG_FILE"
+      }
+    ],
+    "logo": "https://www.duckdns.org/img/ducky_icon.png",
+    "type": 1
+  },
+  {
     "title": "Filebrowser",
     "name": "filebrowser",
     "image": "filebrowser/filebrowser",
@@ -850,6 +904,84 @@
       }
     ],
     "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
+    "type": 1
+  },
+  {
+    "title": "SWAG",
+    "name": "swag",
+    "image": "linuxserver/swag",
+    "description": "SWAG - Secure Web Application Gateway (formerly known as letsencrypt, no relation to Let's Encrypt™) sets up an Nginx webserver and reverse proxy with php support and a built-in certbot client that automates free SSL server certificate generation and renewal processes (Let's Encrypt and ZeroSSL). It also contains fail2ban for intrusion prevention.",
+    "categories": [
+      "proxy"
+    ],
+    "platform": "linux",
+    "note": "<a href='https://docs.linuxserver.io/images/docker-swag'/>Official web</a>.",
+    "restart_policy": "always",
+    "ports": [
+      "443:443/tcp",
+      "80:80/tcp"
+    ],
+    "volumes": [
+      {
+        "container": "/config",
+        "bind": ""
+      }
+    ],
+    "env": [
+      {
+        "name": "PUID",
+        "default": "!PUID",
+        "label": "PUID"
+      },
+      {
+        "name": "PGID",
+        "default": "!PGID",
+        "label": "PGID"
+      },
+      {
+        "name": "TZ",
+        "default": "!TZ",
+        "label": "TZ"
+      },
+      {
+        "name": "SUBDOMAINS",
+        "default": "wildcard",
+        "label": "SUBDOMAINS",
+        "description": "Subdomains you'd like the cert to cover "
+      },
+      {
+        "name": "VALIDATION",
+        "default": "duckdns",
+        "label": "VALIDATION",
+        "description": "Certbot validation method to use, options are http, dns or duckdns"
+      },
+      {
+        "name": "DUCKDNSTOKEN",
+        "default": "",
+        "label": "DUCKDNSTOKEN"
+      },
+      {
+        "name": "URL",
+        "default": "",
+        "label": "URL",
+        "description": "Top url you have control over"
+      },
+      {
+        "name": "EMAIL",
+        "default": "",
+        "label": "EMAIL",
+        "description": "Optional e-mail address used for cert expiration notifications"
+      },
+      {
+        "name": "CERTPROVIDER",
+        "default": "zerossl",
+        "label": "CERTPROVIDER"
+      }
+    ],
+    "cap_add": [
+      "NET_ADMIN"
+    ],
+    "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/swag.gif",
     "type": 1
   },
   {
