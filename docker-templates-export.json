@@ -312,89 +312,6 @@
       "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg"
     },
     {
-      "title": "Prowlarr",
-      "name": "prowlarr",
-      "image": "cr.hotio.dev/hotio/prowlarr:nightly",
-      "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
-      "categories": [
-        "Torrents"
-      ],
-      "platform": "linux",
-      "note": "<a href='https://prowlarr.com'/>Official web</a>.",
-      "restart_policy": "unless-stopped",
-      "ports": [
-        {
-          "label": "WebUI",
-          "hport": "9696",
-          "cport": "9696",
-          "proto": "tcp"
-        }
-      ],
-      "volumes": [
-        {
-          "container": "/config",
-          "bind": "",
-          "variable": "!config/prowlarr"
-        },
-        {
-          "container": "/etc/cont-init.d/98-themepark",
-          "bind": "",
-          "variable": "!theme.park/prowlarr/root/etc/cont-init.d/98-themepark"
-        }
-      ],
-      "env": [
-        {
-          "name": "PUID",
-          "default": "!PUID",
-          "label": "PUID"
-        },
-        {
-          "name": "PGID",
-          "default": "!PGID",
-          "label": "PGID"
-        },
-        {
-          "name": "TZ",
-          "default": "!TZ",
-          "label": "TZ"
-        },
-        {
-          "name": "UMASK",
-          "default": "!UMASK",
-          "label": "UMASK"
-        },
-        {
-          "name": "TP_HOTIO",
-          "default": "true",
-          "label": "TP_HOTIO",
-          "description": "Tell theme.park that we are using hotio paths."
-        },
-        {
-          "name": "TP_THEME",
-          "default": "overseer",
-          "label": "TP_THEME",
-          "description": "theme.park theme"
-        }
-      ],
-      "command": [],
-      "devices": [],
-      "labels": [
-        {
-          "label": "swag",
-          "value": "enable",
-          "variable": ""
-        },
-        {
-          "label": "swag_auth",
-          "value": "http",
-          "variable": ""
-        }
-      ],
-      "sysctls": [],
-      "cap_add": [],
-      "logo": "https://hotio.dev/webhook-avatars/prowlarr.png"
-    },
-    {
       "title": "Plex",
       "name": "plex",
       "image": "cr.hotio.dev/hotio/plex",
@@ -488,6 +405,89 @@
       "sysctls": [],
       "cap_add": [],
       "logo": "https://hotio.dev/webhook-avatars/plex.png"
+    },
+    {
+      "title": "Prowlarr",
+      "name": "prowlarr",
+      "image": "cr.hotio.dev/hotio/prowlarr:nightly",
+      "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
+      "categories": [
+        "Torrents"
+      ],
+      "platform": "linux",
+      "note": "<a href='https://prowlarr.com'/>Official web</a>.",
+      "restart_policy": "unless-stopped",
+      "ports": [
+        {
+          "label": "WebUI",
+          "hport": "9696",
+          "cport": "9696",
+          "proto": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/config",
+          "bind": "",
+          "variable": "!config/prowlarr"
+        },
+        {
+          "container": "/etc/cont-init.d/98-themepark",
+          "bind": "",
+          "variable": "!theme.park/prowlarr/root/etc/cont-init.d/98-themepark"
+        }
+      ],
+      "env": [
+        {
+          "name": "PUID",
+          "default": "!PUID",
+          "label": "PUID"
+        },
+        {
+          "name": "PGID",
+          "default": "!PGID",
+          "label": "PGID"
+        },
+        {
+          "name": "TZ",
+          "default": "!TZ",
+          "label": "TZ"
+        },
+        {
+          "name": "UMASK",
+          "default": "!UMASK",
+          "label": "UMASK"
+        },
+        {
+          "name": "TP_HOTIO",
+          "default": "true",
+          "label": "TP_HOTIO",
+          "description": "Tell theme.park that we are using hotio paths."
+        },
+        {
+          "name": "TP_THEME",
+          "default": "overseer",
+          "label": "TP_THEME",
+          "description": "theme.park theme"
+        }
+      ],
+      "command": [],
+      "devices": [],
+      "labels": [
+        {
+          "label": "swag",
+          "value": "enable",
+          "variable": ""
+        },
+        {
+          "label": "swag_auth",
+          "value": "http",
+          "variable": ""
+        }
+      ],
+      "sysctls": [],
+      "cap_add": [],
+      "logo": "https://hotio.dev/webhook-avatars/prowlarr.png"
     },
     {
       "title": "pyLoad",
