@@ -85,6 +85,18 @@
                     "default": "es,en",
                     "label": "subtitlelanguage",
                     "description": "Desired Language Code"
+                },
+                {
+                    "name": "PREFER_EXISTING",
+                    "default": "false",
+                    "label": "PREFER_EXISTING",
+                    "description": "Checks for existing \"trailer\" file, and skips it if found"
+                },
+                {
+                    "name": "EndClient",
+                    "default": "plex",
+                    "label": "EndClient",
+                    "description": "Select the appropriate client for maximum compatibility"
                 }
             ],
             "logo": "https://raw.githubusercontent.com/RandomNinjaAtk/unraid-templates/master/randomninjaatk/img/amtd.png",
@@ -93,7 +105,7 @@
         {
             "title": "Bazarr",
             "name": "bazarr",
-            "image": "hotio/bazarr:nightly",
+            "image": "cr.hotio.dev/hotio/bazarr:nightly",
             "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.",
             "categories": [
                 "Subtitles"
@@ -144,64 +156,33 @@
                     "default": "true",
                     "label": "TP_HOTIO",
                     "description": "Tell theme.park that we are using hotio paths."
+                },
+                {
+                    "name": "TP_THEME",
+                    "default": "overseer",
+                    "label": "TP_THEME",
+                    "description": "theme.park theme"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/bazarr.png",
             "type": 1
         },
         {
-            "title": "Deemix",
-            "name": "deemix",
-            "image": "registry.gitlab.com/bockiii/deemix-docker",
-            "description": "deemix (lowercase) is a barebone deezer downloader library built from the ashes of Deezloader Remix.",
-            "categories": [
-                "Music"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://deemix.app'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "6595:6595/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/downloads",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK_SET",
-                    "default": "!UMASK",
-                    "label": "UMASK_SET"
-                }
-            ],
-            "logo": "https://styles.redditmedia.com/t5_2kobvw/styles/communityIcon_e23pfk9fwv451.png",
-            "type": 1
-        },
-        {
             "title": "Duck DNS",
             "name": "duckdns",
-            "image": "linuxserver/duckdns",
+            "image": "lscr.io/linuxserver/duckdns",
             "description": "​Duckdns is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.",
             "categories": [
                 "DNS"
@@ -280,307 +261,25 @@
                     "bind": ""
                 }
             ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
+                }
+            ],
             "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg",
-            "type": 1
-        },
-        {
-            "title": "Jackett",
-            "name": "jackett",
-            "image": "hotio/jackett:testing",
-            "description": "Jackett works as a proxy server: it translates queries from apps (Sonarr, Radarr, SickRage, CouchPotato, Mylar, Lidarr, DuckieTV, qBittorrent, Nefarious etc.) into tracker-site-specific http queries, parses the html response, then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches.",
-            "categories": [
-                "Torrents"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://github.com/Jackett/Jackett'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "9117:9117/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                }
-            ],
-            "logo": "https://hotio.dev/webhook-avatars/jackett.png",
-            "type": 1
-        },
-        {
-            "title": "JDownloader",
-            "name": "jdownloader",
-            "image": "jaymoulin/jdownloader",
-            "description": "JDownloader is a free, open-source download management tool with a huge community of developers that makes downloading as easy and fast as it should be. Users can start, stop or pause downloads, set bandwith limitations, auto-extract archives and much more. It's an easy-to-extend framework that can save hours of your valuable time every day!",
-            "categories": [
-                "Downloads"
-            ],
-            "platform": "linux",
-            "note": "You can control this container via <a href='https://my.jdownloader.org'/>MyJDownloader</a>.<a href='https://jdownloader.org'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "3129:3129/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/opt/JDownloader/cfg",
-                    "bind": ""
-                },
-                {
-                    "container": "/opt/JDownloader/Downloads",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/localtime",
-                    "bind": "/etc/localtime"
-                }
-            ],
-            "env": [
-                {
-                    "name": "USER_ID",
-                    "default": "!PUID",
-                    "label": "USER_ID"
-                },
-                {
-                    "name": "GROUP_ID",
-                    "default": "!PGID",
-                    "label": "GROUP_ID"
-                },
-                {
-                    "name": "MYJD_USER",
-                    "default": "",
-                    "label": "MYJD_USER"
-                },
-                {
-                    "name": "MYJD_PASSWORD",
-                    "default": "",
-                    "label": "MYJD_PASSWORD"
-                },
-                {
-                    "name": "MYJD_DEVICE_NAME",
-                    "default": "",
-                    "label": "MYJD_DEVICE_NAME"
-                }
-            ],
-            "logo": "https://jdownloader.org/_media/knowledge/wiki/jdownloader.png",
-            "type": 1
-        },
-        {
-            "title": "Jellyfin",
-            "name": "jellyfin",
-            "image": "hotio/jellyfin",
-            "description": "Jellyfin is the volunteer-built media solution that puts you in control of your media. Stream to any device from your own server, with no strings attached. Your media, your server, your way.",
-            "categories": [
-                "Movies",
-                "TV"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://jellyfin.org'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "8096:8096/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                }
-            ],
-            "logo": "https://hotio.dev/webhook-avatars/jellyfin.png",
-            "type": 1
-        },
-        {
-            "title": "Jellyfin Vue",
-            "name": "jellyfin-vue",
-            "image": "jellyfin/jellyfin-vue:unstable",
-            "description": "This is an experimental web client for Jellyfin based on Vue.js.",
-            "categories": [
-                "Movies",
-                "TV"
-            ],
-            "platform": "linux",
-            "note": "Remember, this is an experimental client, some features may not work properly. <a href='https://github.com/jellyfin/jellyfin-vue'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "8097:80/tcp"
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin-vue/dbf7c4cdc12327c988a4aa336b1d023fb30d5575/client/static/icon.png",
-            "type": 1
-        },
-        {
-            "title": "Ombi",
-            "name": "ombi",
-            "image": "hotio/ombi:testing",
-            "description": "Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves!",
-            "categories": [
-                "Movies",
-                "TV"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://ombi.io/'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "5000:5000/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/Ombi-app/Ombi/develop/src/Ombi/wwwroot/images/favicon/android-chrome-512x512.png",
-            "type": 1
-        },
-        {
-            "title": "Organizr",
-            "name": "organizr",
-            "image": "organizr/organizr",
-            "description": "Do not wait — Forget bookmarks now\ntake the plunge now and ditch your old landing page",
-            "categories": [
-                "Dashboard"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://organizr.app'/>Official web</a>.",
-            "restart_policy": "always",
-            "ports": [
-                "80:80/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "branch",
-                    "default": "v2-develop",
-                    "label": "branch",
-                    "description": "Used to switched between branches of organizr."
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/favicon/android-chrome-512x512.png",
             "type": 1
         },
         {
             "title": "Prowlarr",
             "name": "prowlarr",
-            "image": "hotio/prowlarr:nightly",
+            "image": "cr.hotio.dev/hotio/prowlarr:nightly",
             "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
             "categories": [
                 "Torrents"
@@ -625,17 +324,119 @@
                 {
                     "name": "TP_HOTIO",
                     "default": "true",
-                    "description": "Tell theme.park that we are using hotio paths.",
-                    "label": "TP_HOTIO"
+                    "label": "TP_HOTIO",
+                    "description": "Tell theme.park that we are using hotio paths."
+                },
+                {
+                    "name": "TP_THEME",
+                    "default": "overseer",
+                    "label": "TP_THEME",
+                    "description": "theme.park theme"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/prowlarr.png",
             "type": 1
         },
         {
+            "title": "Plex",
+            "name": "plex",
+            "image": "cr.hotio.dev/hotio/plex",
+            "description": "Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.",
+            "categories": [
+                "Movies",
+                "TV"
+            ],
+            "platform": "linux",
+            "note": "<a href='https://plex.tv'/>Official web</a>.",
+            "restart_policy": "unless-stopped",
+            "ports": [
+                "32400:32400/tcp"
+            ],
+            "volumes": [
+                {
+                    "container": "/config",
+                    "bind": ""
+                },
+                {
+                    "container": "/media",
+                    "bind": ""
+                },
+                {
+                    "container": "/transcode",
+                    "bind": "/tmp/plex"
+                }
+            ],
+            "env": [
+                {
+                    "name": "PUID",
+                    "default": "!PUID",
+                    "label": "PUID"
+                },
+                {
+                    "name": "PGID",
+                    "default": "!PGID",
+                    "label": "PGID"
+                },
+                {
+                    "name": "TZ",
+                    "default": "!TZ",
+                    "label": "TZ"
+                },
+                {
+                    "name": "UMASK",
+                    "default": "!UMASK",
+                    "label": "UMASK"
+                },
+                {
+                    "name": "PLEX_CLAIM",
+                    "default": "",
+                    "label": "PLEX_CLAIM",
+                    "description": "https://www.plex.tv/claim"
+                },
+                {
+                    "name": "ADVERTISE_IP",
+                    "default": "",
+                    "label": "ADVERTISE_IP",
+                    "description": "Aid your local clients in discovering your plex server"
+                },
+                {
+                    "name": "ALLOWED_NETWORKS",
+                    "default": "",
+                    "label": "ALLOWED_NETWORKS",
+                    "description": "Regain access without providing credentials"
+                },
+                {
+                    "name": "PLEX_PASS",
+                    "default": "yes",
+                    "label": "PLEX_PASS"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                }
+            ],
+            "logo": "https://hotio.dev/webhook-avatars/plex.png",
+            "type": 1
+        },
+        {
             "title": "pyLoad",
             "name": "pyload",
-            "image": "linuxserver/pyload",
+            "image": "lscr.io/linuxserver/pyload",
             "description": "Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.",
             "categories": [
                 "Downloads"
@@ -679,13 +480,25 @@
                     "label": "UMASK"
                 }
             ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
+                }
+            ],
             "logo": "https://raw.githubusercontent.com/pyload/pyload/main/media/logo.svg",
             "type": 1
         },
         {
             "title": "qBittorrent",
             "name": "qbittorrent",
-            "image": "hotio/qbittorrent",
+            "image": "cr.hotio.dev/hotio/qbittorrent",
             "description": "The qBittorrent project aims to provide an open-source software alternative to µTorrent.",
             "categories": [
                 "Torrents"
@@ -728,13 +541,25 @@
                     "label": "UMASK"
                 }
             ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
+                }
+            ],
             "logo": "https://hotio.dev/webhook-avatars/qbittorrent.png",
             "type": 1
         },
         {
             "title": "Radarr",
             "name": "radarr",
-            "image": "hotio/radarr:testing",
+            "image": "cr.hotio.dev/hotio/radarr:testing",
             "description": "Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.",
             "categories": [
                 "Movies"
@@ -785,6 +610,24 @@
                     "default": "true",
                     "label": "TP_HOTIO",
                     "description": "Tell theme.park that we are using hotio paths."
+                },
+                {
+                    "name": "TP_THEME",
+                    "default": "overseer",
+                    "label": "TP_THEME",
+                    "description": "theme.park theme"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/radarr.png",
@@ -793,7 +636,7 @@
         {
             "title": "Readarr",
             "name": "readarr",
-            "image": "hotio/readarr:nightly",
+            "image": "cr.hotio.dev/hotio/readarr:nightly",
             "description": "Readarr is an ebook (and maybe eventually magazine/audiobook) collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new books from your favorite authors and will grab, sort and rename them.",
             "categories": [
                 "Books"
@@ -842,8 +685,26 @@
                 {
                     "name": "TP_HOTIO",
                     "default": "true",
-                    "description": "Tell theme.park that we are using hotio paths.",
-                    "label": "TP_HOTIO"
+                    "label": "TP_HOTIO",
+                    "description": "Tell theme.park that we are using hotio paths."
+                },
+                {
+                    "name": "TP_THEME",
+                    "default": "overseer",
+                    "label": "TP_THEME",
+                    "description": "theme.park theme"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/readarr.png",
@@ -852,7 +713,7 @@
         {
             "title": "Sonarr",
             "name": "sonarr",
-            "image": "hotio/sonarr",
+            "image": "cr.hotio.dev/hotio/radarr:sonarr-tmdb",
             "description": "Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
             "categories": [
                 "TV"
@@ -901,8 +762,26 @@
                 {
                     "name": "TP_HOTIO",
                     "default": "true",
-                    "description": "Tell theme.park that we are using hotio paths.",
-                    "label": "TP_HOTIO"
+                    "label": "TP_HOTIO",
+                    "description": "Tell theme.park that we are using hotio paths."
+                },
+                {
+                    "name": "TP_THEME",
+                    "default": "overseer",
+                    "label": "TP_THEME",
+                    "description": "theme.park theme"
+                }
+            ],
+            "labels": [
+                {
+                    "label": "swag",
+                    "value": "enable",
+                    "variable": ""
+                },
+                {
+                    "label": "swag_auth",
+                    "value": "http",
+                    "variable": ""
                 }
             ],
             "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
@@ -911,7 +790,7 @@
         {
             "title": "SWAG",
             "name": "swag",
-            "image": "linuxserver/swag",
+            "image": "lscr.io/linuxserver/swag",
             "description": "SWAG - Secure Web Application Gateway (formerly known as letsencrypt, no relation to Let's Encrypt™) sets up an Nginx webserver and reverse proxy with php support and a built-in certbot client that automates free SSL server certificate generation and renewal processes (Let's Encrypt and ZeroSSL). It also contains fail2ban for intrusion prevention.",
             "categories": [
                 "proxy"
@@ -989,7 +868,7 @@
         {
             "title": "Unpackerr",
             "name": "unpackerr",
-            "image": "hotio/unpackerr:testing",
+            "image": "cr.hotio.dev/hotio/unpackerr:testing",
             "description": "This application runs as a daemon on your download host. It checks for completed downloads and extracts them so Radarr, Lidarr, Sonarr, and Readarr may import them.",
             "categories": [
                 "Torrents"
@@ -1102,7 +981,7 @@
         {
             "title": "WireGuard",
             "name": "wireguard",
-            "image": "linuxserver/wireguard",
+            "image": "lscr.io/linuxserver/wireguard",
             "description": "WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. ",
             "categories": [
                 "VPN"
