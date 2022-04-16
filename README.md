@@ -1,6 +1,25 @@
 # docker-templates
 Docker Templates
 
+To install Notifiarr:
+```bash
+docker run -d --privileged --name=notifiarr \
+  --hostname=server \
+  -l local.notifiarr.port.19999=Connection \
+  -p 5454:5454 \
+  -v /var/run/utmp:/var/run/utmp \
+  -v /etc/sudoers:/etc/sudoers \
+  -v /var/lib/docker/volumes/config/notifiarr:/config \
+  -v /home/server/media:/media \
+  -e "PUID=1000" \
+  -e "PGID=1000" \
+  -e "UMASK=002" \
+  -e "TZ=Europe/Madrid" \
+  -e "TMPDIR=/config/tmp" \
+  --restart always \
+  golift/notifiarr
+```
+
 To install plextraktsync:
 ```bash
 docker run -d --name=plextraktsync \
