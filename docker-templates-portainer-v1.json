@@ -157,7 +157,7 @@
       },
       {
         "name": "TP_THEME",
-        "default": "overseer",
+        "default": "overseerr",
         "label": "TP_THEME",
         "description": "theme.park theme"
       }
@@ -411,7 +411,7 @@
       },
       {
         "name": "TP_THEME",
-        "default": "overseer",
+        "default": "overseerr",
         "label": "TP_THEME",
         "description": "theme.park theme"
       }
@@ -432,9 +432,9 @@
     "type": 1
   },
   {
-    "title": "pyLoad",
-    "name": "pyload",
-    "image": "lscr.io/linuxserver/pyload",
+    "title": "pyLoad-ng",
+    "name": "pyload-ng",
+    "image": "lscr.io/linuxserver/pyload-ng:develop",
     "description": "Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.",
     "categories": [
       "Downloads"
@@ -515,6 +515,10 @@
       {
         "container": "/media/downloads",
         "bind": ""
+      },
+      {
+        "container": "/etc/cont-init.d/98-themepark",
+        "bind": ""
       }
     ],
     "env": [
@@ -537,6 +541,18 @@
         "name": "UMASK",
         "default": "!UMASK",
         "label": "UMASK"
+      },
+      {
+        "name": "TP_HOTIO",
+        "default": "true",
+        "label": "TP_HOTIO",
+        "description": "Tell theme.park that we are using hotio paths."
+      },
+      {
+        "name": "TP_THEME",
+        "default": "overseerr",
+        "label": "TP_THEME",
+        "description": "theme.park theme"
       }
     ],
     "labels": [
@@ -611,7 +627,7 @@
       },
       {
         "name": "TP_THEME",
-        "default": "overseer",
+        "default": "overseerr",
         "label": "TP_THEME",
         "description": "theme.park theme"
       }
@@ -688,7 +704,7 @@
       },
       {
         "name": "TP_THEME",
-        "default": "overseer",
+        "default": "overseerr",
         "label": "TP_THEME",
         "description": "theme.park theme"
       }
@@ -765,7 +781,7 @@
       },
       {
         "name": "TP_THEME",
-        "default": "overseer",
+        "default": "overseerr",
         "label": "TP_THEME",
         "description": "theme.park theme"
       }
@@ -855,6 +871,11 @@
         "name": "CERTPROVIDER",
         "default": "zerossl",
         "label": "CERTPROVIDER"
+      },
+      {
+        "name": "DOCKER_MODS",
+        "default": "linuxserver/mods:universal-docker|linuxserver/mods:swag-auto-proxy|linuxserver/mods:swag-dashboard",
+        "label": "DOCKER_MODS"
       }
     ],
     "cap_add": [
