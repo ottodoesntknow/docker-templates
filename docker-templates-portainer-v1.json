@@ -820,6 +820,10 @@
       {
         "container": "/config",
         "bind": ""
+      },
+      {
+        "container": "/var/run/docker.sock",
+        "bind": "/var/run/docker.sock"
       }
     ],
     "env": [

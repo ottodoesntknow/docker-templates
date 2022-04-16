@@ -882,6 +882,10 @@
       {
         "container": "/config",
         "bind": "!config/swag"
+      },
+      {
+        "container": "/var/run/docker.sock",
+        "bind": "/var/run/docker.sock"
       }
     ],
     "env": [
