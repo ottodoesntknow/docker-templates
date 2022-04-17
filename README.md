@@ -8,6 +8,7 @@ docker run -d --name=yacht \
   -l swag=enable \
   -l swag_auth=http \
   -p 8000:8000 \
+  --net themysteryshack \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/docker/volumes/config/yacht:/config \
   --restart always \
@@ -17,19 +18,21 @@ docker run -d --name=yacht \
 To install Notifiarr:
 ```bash
 docker run -d --privileged --name=notifiarr \
-  --hostname=server \
+  --hostname=themysteryshack \
   -l local.notifiarr.port.19999=Connection \
   -l swag=enable \
   -p 5454:5454 \
+  --net themysteryshack \
   -v /var/run/utmp:/var/run/utmp \
   -v /etc/sudoers:/etc/sudoers \
   -v /var/lib/docker/volumes/config/notifiarr:/config \
   -v /home/server/media:/media \
+  -v /tmp/notifiarr:/tmp \
   -e "PUID=1000" \
   -e "PGID=1000" \
   -e "UMASK=002" \
   -e "TZ=Europe/Madrid" \
-  -e "TMPDIR=/config/tmp" \
+  -e "TMPDIR=/tmp" \
   --restart always \
   golift/notifiarr
 ```
