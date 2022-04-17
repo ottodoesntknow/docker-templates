@@ -289,6 +289,11 @@
         "label": "swag_auth",
         "value": "http",
         "variable": ""
+      },
+      {
+        "label": "swag_port",
+        "value": "80",
+        "variable": ""
       }
     ],
     "sysctls": [],
