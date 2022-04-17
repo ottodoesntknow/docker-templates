@@ -1,6 +1,19 @@
 # docker-templates
 Docker Templates
 
+To install yacht:
+```bash
+docker run -d --name=yacht \
+  -l local.yacht.port.8000=WebUI \
+  -l swag=enable \
+  -l swag_auth=http \
+  -p 8000:8000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/lib/docker/volumes/config/yacht:/config \
+  --restart always \
+  selfhostedpro/yacht
+```
+
 To install Notifiarr:
 ```bash
 docker run -d --privileged --name=notifiarr \
