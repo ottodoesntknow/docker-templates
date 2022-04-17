@@ -1218,7 +1218,13 @@
       ],
       "command": [],
       "devices": [],
-      "labels": [],
+      "labels": [
+        {
+          "label": "swag",
+          "value": "enable",
+          "variable": ""
+        }
+      ],
       "sysctls": [
         {
           "name": "net.ipv4.conf.all.src_valid_mark",

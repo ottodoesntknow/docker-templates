@@ -1066,6 +1066,13 @@
         "label": "INTERNAL_SUBNET"
       }
     ],
+    "labels": [
+      {
+        "label": "swag",
+        "value": "enable",
+        "variable": ""
+      }
+    ],
     "sysctls": [
       {
         "net.ipv4.conf.all.src_valid_mark": "1"
