@@ -6,6 +6,7 @@ To install Notifiarr:
 docker run -d --privileged --name=notifiarr \
   --hostname=server \
   -l local.notifiarr.port.19999=Connection \
+  -l swag=enable \
   -p 5454:5454 \
   -v /var/run/utmp:/var/run/utmp \
   -v /etc/sudoers:/etc/sudoers \
