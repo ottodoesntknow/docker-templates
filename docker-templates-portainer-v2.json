@@ -2,1095 +2,964 @@
     "version": "2",
     "templates": [
         {
-            "title": "AMTD",
-            "name": "amtd",
-            "image": "randomninjaatk/amtd",
-            "description": "Automated Movie Trailer Downloader is a Radarr companion script to automatically download movie trailers and extras for use in other video applications (plex/kodi/jellyfin/emby)",
-            "categories": [
-                "Movies"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://github.com/RandomNinjaAtk/docker-amtd'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                }
-            ],
+            "type": 1,
+            "title": "aMule",
+            "description": "aMule is an eMule-like client for the eDonkey and Kademlia networks.",
+            "image": "ghcr.io/ngosang/amule:latest",
+            "name": "amule",
+            "logo": "https://raw.githubusercontent.com/amule-project/amule/master/amule.png",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
-                    "name": "AUTOSTART",
-                    "default": "true",
-                    "label": "AUTOSTART",
-                    "description": "Runs script automatically on startup"
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
-                    "name": "SCRIPTINTERVAL",
-                    "default": "1d",
-                    "label": "SCRIPTINTERVAL",
-                    "description": "Amount of time between each script run, when AUTOSTART is enabled"
+                    "name": "GUI_PWD",
+                    "label": "GUI_PWD"
                 },
                 {
-                    "name": "RadarrUrl",
-                    "default": "",
-                    "label": "RadarrUrl",
-                    "description": "Set domain or IP to your Radarr instance including port."
+                    "name": "WEBUI_PWD",
+                    "label": "WEBUI_PWD"
                 },
                 {
-                    "name": "RadarrAPIkey",
-                    "default": "",
-                    "label": "RadarrAPIkey"
+                    "name": "MOD_AUTO_RESTART_ENABLED",
+                    "label": "MOD_AUTO_RESTART_ENABLED",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
                 },
                 {
-                    "name": "extrastype",
-                    "default": "all",
-                    "label": "extrastype",
-                    "description": "all downloads all available videos (trailers, clips, featurette, etc...), trailers only downloads trailers"
+                    "name": "MOD_AUTO_RESTART_CRON",
+                    "label": "MOD_AUTO_RESTART_CRON",
+                    "default": "0 2 * * *"
                 },
                 {
-                    "name": "LANGUAGES",
-                    "default": "es,en",
-                    "label": "LANGUAGES",
-                    "description": "Set the primary desired language, if not found, fallback to next language in the list... (this is a \",\" separated list of ISO 639-1 language codes)"
+                    "name": "MOD_AUTO_SHARE_ENABLED",
+                    "label": "MOD_AUTO_SHARE_ENABLED",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true"
+                        },
+                        {
+                            "text": "false",
+                            "value": "false",
+                            "default": true
+                        }
+                    ]
                 },
                 {
-                    "name": "USEFOLDERS",
-                    "default": "true",
-                    "label": "USEFOLDERS",
-                    "description": "Creates subfolders within the movie folder for extras"
-                },
-                {
-                    "name": "SINGLETRAILER",
-                    "default": "false",
-                    "label": "SINGLETRAILER",
-                    "description": "Only downloads the first available trailer, does not apply to other extras type"
-                },
-                {
-                    "name": "subtitlelanguage",
-                    "default": "es,en",
-                    "label": "subtitlelanguage",
-                    "description": "Desired Language Code"
-                },
-                {
-                    "name": "PREFER_EXISTING",
-                    "default": "false",
-                    "label": "PREFER_EXISTING",
-                    "description": "Checks for existing \"trailer\" file, and skips it if found"
-                },
-                {
-                    "name": "EndClient",
-                    "default": "plex",
-                    "label": "EndClient",
-                    "description": "Select the appropriate client for maximum compatibility"
+                    "name": "MOD_FIX_KAD_GRAPH_ENABLED",
+                    "label": "MOD_FIX_KAD_GRAPH_ENABLED",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
                 }
             ],
-            "logo": "https://raw.githubusercontent.com/RandomNinjaAtk/unraid-templates/master/randomninjaatk/img/amtd.png",
-            "type": 1
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/home/amule/.aMule"
+                },
+                {
+                    "container": "/incoming"
+                },
+                {
+                    "container": "/temp"
+                }
+            ],
+            "ports": [
+                "4711:4711/tcp",
+                "4712:4712/tcp",
+                "4662:4662/tcp",
+                "4665:4665/udp",
+                "4672:4672/udp"
+            ],
+            "labels": [
+                {
+                    "name": "swag",
+                    "value": "enable"
+                },
+                {
+                    "name": "swag_auth",
+                    "value": "http"
+                },
+                {
+                    "name": "swag_port",
+                    "value": "4711"
+                }
+            ],
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://www.amule.org/'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "downloads"
+            ]
         },
         {
+            "type": 1,
             "title": "Bazarr",
-            "name": "bazarr",
-            "image": "cr.hotio.dev/hotio/bazarr:nightly",
             "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.",
-            "categories": [
-                "Subtitles"
+            "image": "cr.hotio.dev/hotio/bazarr:nightly",
+            "name": "bazarr",
+            "logo": "https://hotio.dev/webhook-avatars/bazarr.png",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
+                }
             ],
-            "platform": "linux",
-            "note": "<a href='https://www.bazarr.media'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/media"
+                },
+                {
+                    "container": "/config"
+                }
+            ],
             "ports": [
                 "6767:6767/tcp"
             ],
-            "volumes": [
-                {
-                    "container": "/media",
-                    "bind": ""
-                },
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                },
-                {
-                    "name": "TP_THEME",
-                    "default": "overseerr",
-                    "label": "TP_THEME",
-                    "description": "theme.park theme"
-                }
-            ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/bazarr.png",
-            "type": 1
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://www.bazarr.media'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "subtitles"
+            ]
         },
         {
+            "type": 1,
             "title": "Duck DNS",
+            "description": "Duckdns is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.",
+            "image": "lscr.io/linuxserver/duckdns:latest",
             "name": "duckdns",
-            "image": "lscr.io/linuxserver/duckdns",
-            "description": "​Duckdns is a free service which will point a DNS (sub domains of duckdns.org) to an IP of your choice. The service is completely free, and doesn't require reactivation or forum posts to maintain its existence.",
-            "categories": [
-                "DNS"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://www.duckdns.org'/>Official web</a>.",
-            "restart_policy": "always",
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                }
-            ],
+            "logo": "https://www.duckdns.org/img/ducky_icon.png",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
                     "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
                     "name": "SUBDOMAINS",
-                    "default": "",
                     "label": "SUBDOMAINS",
-                    "description": "multiple subdomains allowed, comma separated, no spaces"
+                    "default": "themysteryshack"
                 },
                 {
                     "name": "TOKEN",
-                    "default": "",
-                    "label": "TOKEN",
-                    "description": "DuckDNS token"
+                    "label": "TOKEN"
                 },
                 {
                     "name": "LOG_FILE",
-                    "default": "true",
-                    "label": "LOG_FILE"
+                    "label": "LOG_FILE",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
                 }
             ],
-            "logo": "https://www.duckdns.org/img/ducky_icon.png",
-            "type": 1
+            "volumes": [
+                {
+                    "container": "/config"
+                }
+            ],
+            "restart_policy": "always",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://www.duckdns.org'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "dns"
+            ]
         },
         {
-            "title": "Filebrowser",
-            "name": "filebrowser",
-            "image": "filebrowser/filebrowser",
-            "description": "filebrowser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
-            "categories": [
-                "Files"
+            "type": 1,
+            "title": "Excludarr",
+            "description": "Excludarr is a CLI that interacts with Radarr and Sonarr instances. It completely manages you library in Sonarr and Radarr to only consist out of movies and series that are not present on any of the configured streaming providers.",
+            "image": "haijeploeg/excludarr:latest",
+            "name": "excludarr",
+            "env": [
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "GENERAL_LOCALE",
+                    "label": "GENERAL_LOCALE",
+                    "default": "es_ES"
+                },
+                {
+                    "name": "GENERAL_PROVIDERS",
+                    "label": "GENERAL_PROVIDERS",
+                    "default": "'netflix', 'amazon prime video', 'hbo max', 'disney plus', 'apple tv plus', 'filmin', 'lionsgate plus'"
+                },
+                {
+                    "name": "TMDB_API_KEY",
+                    "label": "TMDB_API_KEY"
+                },
+                {
+                    "name": "RADARR_URL",
+                    "label": "RADARR_URL"
+                },
+                {
+                    "name": "RADARR_API_KEY",
+                    "label": "RADARR_API_KEY"
+                },
+                {
+                    "name": "RADARR_EXCLUDE",
+                    "label": "RADARR_EXCLUDE"
+                },
+                {
+                    "name": "SONARR_URL",
+                    "label": "SONARR_URL"
+                },
+                {
+                    "name": "SONARR_API_KEY",
+                    "label": "SONARR_API_KEY"
+                },
+                {
+                    "name": "SONARR_EXCLUDE",
+                    "label": "SONARR_EXCLUDE"
+                },
+                {
+                    "name": "CRON_MODE",
+                    "label": "CRON_MODE",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
+                }
             ],
+            "volumes": [
+                {
+                    "container": "/etc/excludarr"
+                }
+            ],
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://github.com/haijeploeg/excludarr'/>Official web</a>.",
             "platform": "linux",
-            "note": "The default user and password is admin/admin. To ensure the DB containing your login persists through a rebuild, create a filebrowser.db file in the !config/filebrowser container folder. <a href='https://filebrowser.org'/>Official web</a>.",
-            "restart_policy": "always",
+            "categories": [
+                "movies",
+                "tv"
+            ]
+        },
+        {
+            "type": 1,
+            "title": "Filebrowser",
+            "description": "filebrowser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
+            "image": "filebrowser/filebrowser:latest",
+            "name": "filebrowser",
+            "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg",
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/srv"
+                },
+                {
+                    "container": "/srv/docker/volumes"
+                },
+                {
+                    "container": "/database.db"
+                }
+            ],
             "ports": [
                 "8888:80/tcp"
             ],
-            "volumes": [
-                {
-                    "container": "/srv",
-                    "bind": ""
-                },
-                {
-                    "container": "/srv/docker/volumes",
-                    "bind": "/var/lib/docker/volumes"
-                },
-                {
-                    "container": "/database.db",
-                    "bind": ""
-                }
-            ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 },
                 {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_port",
-                    "value": "80",
-                    "variable": ""
+                    "name": "swag_port",
+                    "value": "80"
                 }
             ],
-            "logo": "https://raw.githubusercontent.com/filebrowser/filebrowser/5aaeb3b76d833381d90bec5e1500ccdaecfb2bf5/frontend/public/img/logo.svg",
-            "type": 1
+            "restart_policy": "always",
+            "hostname": "themysteryshack",
+            "note": "The default user and password is admin/admin. To ensure the DB containing your login persists through a rebuild, create a filebrowser.db file in the !config/filebrowser container folder. <a href='https://filebrowser.org'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "files"
+            ]
         },
         {
-            "title": "Plex",
-            "name": "plex",
-            "image": "cr.hotio.dev/hotio/plex",
-            "description": "Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.",
-            "categories": [
-                "Movies",
-                "TV"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://plex.tv'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "32400:32400/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                },
-                {
-                    "container": "/transcode",
-                    "bind": "/tmp/plex"
-                }
-            ],
+            "type": 1,
+            "title": "Notifiarr",
+            "description": "This is the unified client for Notifiarr.com. The client enables content requests from Media Bot in your Discord Server and also provides reports for Plex usage and system health among many other features.",
+            "image": "golift/notifiarr:latest",
+            "name": "notifiarr",
+            "logo": "https://raw.githubusercontent.com/Go-Lift-TV/discordnotifier-client/main/init/windows/application.ico",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
                     "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
                     "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
+                    "label": "UMASK",
+                    "default": "002"
+                },
+                {
+                    "name": "TMPDIR",
+                    "label": "TMPDIR",
+                    "default": "/tmp"
+                }
+            ],
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/media"
+                },
+                {
+                    "container": "/config"
+                },
+                {
+                    "container": "/tmp"
+                },
+                {
+                    "container": "/var/run/utmp"
+                },
+                {
+                    "container": "/etc/sudoers"
+                }
+            ],
+            "ports": [
+                "5454:5454/tcp"
+            ],
+            "labels": [
+                {
+                    "name": "swag",
+                    "value": "enable"
+                }
+            ],
+            "privileged": true,
+            "restart_policy": "always",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://notifiarr.com'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "notifications"
+            ]
+        },
+        {
+            "type": 1,
+            "title": "Plex",
+            "description": "Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.",
+            "image": "cr.hotio.dev/hotio/plex:latest",
+            "name": "plex",
+            "logo": "https://hotio.dev/webhook-avatars/plex.png",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
                 },
                 {
                     "name": "PLEX_CLAIM",
-                    "default": "",
-                    "label": "PLEX_CLAIM",
-                    "description": "https://www.plex.tv/claim"
+                    "label": "PLEX_CLAIM"
                 },
                 {
                     "name": "ADVERTISE_IP",
-                    "default": "",
-                    "label": "ADVERTISE_IP",
-                    "description": "Aid your local clients in discovering your plex server"
+                    "label": "ADVERTISE_IP"
                 },
                 {
                     "name": "ALLOWED_NETWORKS",
-                    "default": "",
-                    "label": "ALLOWED_NETWORKS",
-                    "description": "Regain access without providing credentials"
+                    "label": "ALLOWED_NETWORKS"
+                }
+            ],
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/media"
                 },
                 {
-                    "name": "PLEX_PASS",
-                    "default": "yes",
-                    "label": "PLEX_PASS"
+                    "container": "/config"
+                },
+                {
+                    "container": "/transcode"
                 }
+            ],
+            "ports": [
+                "32400:32400/tcp"
             ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/plex.png",
-            "type": 1
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://plex.tv'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "movies",
+                "tv"
+            ]
         },
         {
+            "type": 1,
             "title": "Prowlarr",
-            "name": "prowlarr",
-            "image": "cr.hotio.dev/hotio/prowlarr:nightly",
             "description": "Prowlarr is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).",
-            "categories": [
-                "Torrents"
+            "image": "cr.hotio.dev/hotio/prowlarr:nightly",
+            "name": "prowlarr",
+            "logo": "https://hotio.dev/webhook-avatars/prowlarr.png",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
+                }
             ],
-            "platform": "linux",
-            "note": "<a href='https://prowlarr.com'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/config"
+                }
+            ],
             "ports": [
                 "9696:9696/tcp"
             ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                },
-                {
-                    "name": "TP_THEME",
-                    "default": "overseerr",
-                    "label": "TP_THEME",
-                    "description": "theme.park theme"
-                }
-            ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/prowlarr.png",
-            "type": 1
-        },
-        {
-            "title": "pyLoad-ng",
-            "name": "pyload-ng",
-            "image": "lscr.io/linuxserver/pyload-ng:develop",
-            "description": "Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.",
-            "categories": [
-                "Downloads"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://pyload.net'/>Official web</a>.",
             "restart_policy": "unless-stopped",
-            "ports": [
-                "8001:8000/tcp",
-                "7227:7227/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/downloads",
-                    "bind": ""
-                }
-            ],
+            "hostname": "themysteryshack",
+            "note": "<a href='https://prowlarr.com'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "torrents"
+            ]
+        },
+        {
+            "type": 1,
+            "title": "qBit Manage",
+            "description": "This tool will help manage tedious tasks in qBittorrent and automate them. Tag, categorize, remove Orphaned data, remove unregistered torrents and much much more.",
+            "image": "cr.hotio.dev/hotio/qbitmanage:latest",
+            "name": "qbitmanage",
+            "logo": "https://raw.githubusercontent.com/StuffAnThings/qbit_manage/master/qbm_logo.png",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
                     "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
                     "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                }
-            ],
-            "labels": [
-                {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
+                    "label": "UMASK",
+                    "default": "002"
                 },
                 {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "QBT_SCHEDULE",
+                    "label": "QBT_SCHEDULE",
+                    "default": "60"
                 }
             ],
-            "logo": "https://raw.githubusercontent.com/pyload/pyload/main/media/logo.svg",
-            "type": 1
+            "volumes": [
+                {
+                    "container": "/media/downloads"
+                },
+                {
+                    "container": "/config"
+                },
+                {
+                    "container": "/qbittorrent/data/BT_backup"
+                }
+            ],
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://github.com/haijeploeg/excludarr'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "torrents"
+            ]
         },
         {
+            "type": 1,
             "title": "qBittorrent",
-            "name": "qbittorrent",
-            "image": "cr.hotio.dev/hotio/qbittorrent",
             "description": "The qBittorrent project aims to provide an open-source software alternative to µTorrent.",
-            "categories": [
-                "Torrents"
-            ],
-            "platform": "linux",
-            "note": "You can use the alternative Web UI VueTorrent in /app/vuetorrent. <a href='https://www.qbittorrent.org'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
-            "ports": [
-                "8080:8080/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media/downloads",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
+            "image": "cr.hotio.dev/hotio/qbittorrent:legacy",
+            "name": "qbittorrent",
+            "logo": "https://hotio.dev/webhook-avatars/qbittorrent.png",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
                     "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
                     "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
+                    "label": "UMASK",
+                    "default": "002"
                 },
                 {
                     "name": "TP_HOTIO",
-                    "default": "true",
                     "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
                 },
                 {
                     "name": "TP_THEME",
-                    "default": "overseerr",
                     "label": "TP_THEME",
-                    "description": "theme.park theme"
+                    "default": "overseerr"
                 }
+            ],
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/config"
+                },
+                {
+                    "container": "/media/downloads"
+                },
+                {
+                    "container": "/etc/cont-init.d/98-themepark"
+                }
+            ],
+            "ports": [
+                "8080:8080/tcp",
+                "14340:14340/tcp"
             ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/qbittorrent.png",
-            "type": 1
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "You can use the alternative Web UI VueTorrent in /app/vuetorrent. <a href='https://www.qbittorrent.org'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "torrents"
+            ]
         },
         {
+            "type": 1,
             "title": "Radarr",
-            "name": "radarr",
-            "image": "cr.hotio.dev/hotio/radarr:testing",
             "description": "Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.",
-            "categories": [
-                "Movies"
+            "image": "cr.hotio.dev/hotio/radarr:nightly",
+            "name": "radarr",
+            "logo": "https://hotio.dev/webhook-avatars/radarr.png",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
+                }
             ],
-            "platform": "linux",
-            "note": "<a href='https://radarr.video'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/media"
+                },
+                {
+                    "container": "/config"
+                }
+            ],
             "ports": [
                 "7878:7878/tcp"
             ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                },
-                {
-                    "name": "TP_THEME",
-                    "default": "overseerr",
-                    "label": "TP_THEME",
-                    "description": "theme.park theme"
-                }
-            ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/radarr.png",
-            "type": 1
-        },
-        {
-            "title": "Readarr",
-            "name": "readarr",
-            "image": "cr.hotio.dev/hotio/readarr:nightly",
-            "description": "Readarr is an ebook (and maybe eventually magazine/audiobook) collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new books from your favorite authors and will grab, sort and rename them.",
-            "categories": [
-                "Books"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://readarr.com'/>Official web</a>.",
             "restart_policy": "unless-stopped",
-            "ports": [
-                "8787:8787/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                },
-                {
-                    "name": "TP_THEME",
-                    "default": "overseerr",
-                    "label": "TP_THEME",
-                    "description": "theme.park theme"
-                }
-            ],
-            "labels": [
-                {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
-                }
-            ],
-            "logo": "https://hotio.dev/webhook-avatars/readarr.png",
-            "type": 1
+            "hostname": "themysteryshack",
+            "note": "<a href='https://radarr.video'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "movies"
+            ]
         },
         {
+            "type": 1,
             "title": "Sonarr",
-            "name": "sonarr",
-            "image": "cr.hotio.dev/hotio/radarr:sonarr-tmdb",
             "description": "Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
-            "categories": [
-                "TV"
+            "image": "cr.hotio.dev/hotio/sonarr:v4",
+            "name": "sonarr",
+            "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
+                }
             ],
-            "platform": "linux",
-            "note": "<a href='https://sonarr.tv'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/media"
+                },
+                {
+                    "container": "/config"
+                }
+            ],
             "ports": [
                 "8989:8989/tcp"
             ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/media",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/cont-init.d/98-themepark",
-                    "bind": ""
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                },
-                {
-                    "name": "TP_HOTIO",
-                    "default": "true",
-                    "label": "TP_HOTIO",
-                    "description": "Tell theme.park that we are using hotio paths."
-                },
-                {
-                    "name": "TP_THEME",
-                    "default": "overseerr",
-                    "label": "TP_THEME",
-                    "description": "theme.park theme"
-                }
-            ],
             "labels": [
                 {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                },
-                {
-                    "label": "swag_auth",
-                    "value": "http",
-                    "variable": ""
+                    "name": "swag",
+                    "value": "enable"
                 }
             ],
-            "logo": "https://hotio.dev/webhook-avatars/sonarr.png",
-            "type": 1
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://sonarr.tv'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "tv"
+            ]
         },
         {
+            "type": 1,
             "title": "SWAG",
-            "name": "swag",
-            "image": "lscr.io/linuxserver/swag",
             "description": "SWAG - Secure Web Application Gateway (formerly known as letsencrypt, no relation to Let's Encrypt™) sets up an Nginx webserver and reverse proxy with php support and a built-in certbot client that automates free SSL server certificate generation and renewal processes (Let's Encrypt and ZeroSSL). It also contains fail2ban for intrusion prevention.",
-            "categories": [
-                "proxy"
-            ],
-            "platform": "linux",
-            "note": "<a href='https://docs.linuxserver.io/images/docker-swag'/>Official web</a>.",
-            "restart_policy": "always",
-            "ports": [
-                "443:443/tcp",
-                "80:80/tcp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/var/run/docker.sock",
-                    "bind": "/var/run/docker.sock"
-                }
-            ],
+            "image": "lscr.io/linuxserver/swag:latest",
+            "name": "swag",
+            "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/swag.gif",
             "env": [
                 {
                     "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
+                    "label": "PUID",
+                    "default": "1000"
                 },
                 {
                     "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
+                    "label": "PGID",
+                    "default": "1000"
                 },
                 {
                     "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
                 },
                 {
                     "name": "SUBDOMAINS",
-                    "default": "wildcard",
                     "label": "SUBDOMAINS",
-                    "description": "Subdomains you'd like the cert to cover "
+                    "default": "wildcard"
                 },
                 {
                     "name": "VALIDATION",
-                    "default": "duckdns",
                     "label": "VALIDATION",
-                    "description": "Certbot validation method to use, options are http, dns or duckdns"
+                    "default": "duckdns"
                 },
                 {
                     "name": "DUCKDNSTOKEN",
-                    "default": "",
                     "label": "DUCKDNSTOKEN"
                 },
                 {
                     "name": "URL",
-                    "default": "",
-                    "label": "URL",
-                    "description": "Top url you have control over"
+                    "label": "URL"
                 },
                 {
                     "name": "EMAIL",
-                    "default": "",
-                    "label": "EMAIL",
-                    "description": "Optional e-mail address used for cert expiration notifications"
+                    "label": "EMAIL"
                 },
                 {
                     "name": "CERTPROVIDER",
-                    "default": "zerossl",
-                    "label": "CERTPROVIDER"
+                    "label": "CERTPROVIDER",
+                    "default": "zerossl"
                 },
                 {
                     "name": "DOCKER_MODS",
-                    "default": "linuxserver/mods:universal-docker|linuxserver/mods:swag-auto-proxy|linuxserver/mods:swag-dashboard",
-                    "label": "DOCKER_MODS"
+                    "label": "DOCKER_MODS",
+                    "default": "linuxserver/mods:universal-docker|linuxserver/mods:swag-auto-proxy|linuxserver/mods:swag-dashboard"
                 }
             ],
-            "cap_add": [
-                "NET_ADMIN"
-            ],
-            "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/swag.gif",
-            "type": 1
-        },
-        {
-            "title": "Unpackerr",
-            "name": "unpackerr",
-            "image": "cr.hotio.dev/hotio/unpackerr:testing",
-            "description": "This application runs as a daemon on your download host. It checks for completed downloads and extracts them so Radarr, Lidarr, Sonarr, and Readarr may import them.",
-            "categories": [
-                "Torrents"
-            ],
-            "platform": "linux",
-            "note": "You can configure it (with *arr APIs, etc) in the unpackerr.conf file in the !config/unpackerrr container folder. <a href='https://github.com/davidnewhall/unpackerr'/>Official web</a>.",
-            "restart_policy": "unless-stopped",
+            "network": "themysteryshack",
             "volumes": [
                 {
-                    "container": "/config",
-                    "bind": ""
+                    "container": "/config"
                 },
                 {
-                    "container": "/media/downloads",
-                    "bind": ""
-                },
-                {
-                    "container": "/etc/unpackerr/unpackerr.conf",
-                    "bind": ""
+                    "container": "/var/run/docker.sock",
+                    "bind": "/var/run/docker.sock",
+                    "readonly": true
                 }
             ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "UMASK",
-                    "default": "!UMASK",
-                    "label": "UMASK"
-                }
+            "ports": [
+                "443:443/tcp",
+                "80:80/tcp"
             ],
-            "logo": "https://hotio.dev/webhook-avatars/unpackerr.png",
-            "type": 1
+            "restart_policy": "always",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://docs.linuxserver.io/images/docker-swag'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "proxy"
+            ]
         },
         {
+            "type": 1,
             "title": "Watchtower",
-            "name": "watchtower",
-            "image": "containrrr/watchtower",
             "description": "A process for automating Docker container base image updates.",
-            "categories": [
-                "Updates"
+            "image": "containrrr/watchtower:latest",
+            "name": "watchtower",
+            "logo": "https://raw.githubusercontent.com/containrrr/watchtower/29f5c4b254a686d9198277a78f5066666240f0e0/logo.png",
+            "env": [
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "WATCHTOWER_CLEANUP",
+                    "label": "WATCHTOWER_CLEANUP",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
+                },
+                {
+                    "name": "WATCHTOWER_DEBUG",
+                    "label": "WATCHTOWER_DEBUG",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
+                },
+                {
+                    "name": "WATCHTOWER_INCLUDE_STOPPED",
+                    "label": "WATCHTOWER_INCLUDE_STOPPED",
+                    "select": [
+                        {
+                            "text": "true",
+                            "value": "true",
+                            "default": true
+                        },
+                        {
+                            "text": "false",
+                            "value": "false"
+                        }
+                    ]
+                },
+                {
+                    "name": "WATCHTOWER_POLL_INTERVAL",
+                    "label": "WATCHTOWER_POLL_INTERVAL",
+                    "default": "3600"
+                },
+                {
+                    "name": "WATCHTOWER_NOTIFICATIONS",
+                    "label": "WATCHTOWER_NOTIFICATIONS",
+                    "default": "shoutrrr"
+                },
+                {
+                    "name": "WATCHTOWER_NOTIFICATION_URL",
+                    "label": "WATCHTOWER_NOTIFICATION_URL"
+                }
             ],
-            "platform": "linux",
-            "note": "<a href='https://containrrr.dev/watchtower'/>Official web</a>.",
-            "restart_policy": "always",
             "volumes": [
                 {
                     "container": "/var/run/docker.sock",
                     "bind": "/var/run/docker.sock"
                 }
             ],
-            "env": [
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "WATCHTOWER_CLEANUP",
-                    "default": "true",
-                    "label": "WATCHTOWER_CLEANUP",
-                    "description": "Removes old images after updating."
-                },
-                {
-                    "name": "WATCHTOWER_DEBUG",
-                    "default": "true",
-                    "label": "WATCHTOWER_DEBUG",
-                    "description": "Enable debug mode with verbose logging."
-                },
-                {
-                    "name": "WATCHTOWER_INCLUDE_STOPPED",
-                    "default": "true",
-                    "label": "WATCHTOWER_INCLUDE_STOPPED",
-                    "description": "Will also include created and exited containers."
-                },
-                {
-                    "name": "WATCHTOWER_POLL_INTERVAL",
-                    "default": "3600",
-                    "label": "WATCHTOWER_POLL_INTERVAL",
-                    "description": "Poll interval (in seconds = 1 hour)."
-                },
-                {
-                    "name": "WATCHTOWER_NOTIFICATIONS",
-                    "default": "shoutrrr",
-                    "label": "WATCHTOWER_NOTIFICATIONS",
-                    "description": "Send notifications via containrrr/shoutrrr."
-                },
-                {
-                    "name": "WATCHTOWER_NOTIFICATION_URL",
-                    "default": "",
-                    "label": "WATCHTOWER_NOTIFICATION_URL",
-                    "description": "The shoutrrr service URL to be used."
-                }
-            ],
-            "logo": "https://raw.githubusercontent.com/containrrr/watchtower/29f5c4b254a686d9198277a78f5066666240f0e0/logo.png",
-            "type": 1
-        },
-        {
-            "title": "WireGuard",
-            "name": "wireguard",
-            "image": "lscr.io/linuxserver/wireguard",
-            "description": "WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. ",
-            "categories": [
-                "VPN"
-            ],
-            "platform": "linux",
-            "note": "The peer/client config qr codes will be output in the docker log. They will also be saved in text and png format under /config/peerX in case PEERS is a variable and an integer or /config/peer_X in case a list of names was provided instead of an integer. Make sure to make port 51820 public if accessing remotely. <a href='https://www.wireguard.com'/>Official web</a>.",
             "restart_policy": "always",
-            "ports": [
-                "51820:51820/udp"
-            ],
-            "volumes": [
-                {
-                    "container": "/config",
-                    "bind": ""
-                },
-                {
-                    "container": "/lib/modules",
-                    "bind": "/lib/modules"
-                }
-            ],
-            "env": [
-                {
-                    "name": "PUID",
-                    "default": "!PUID",
-                    "label": "PUID"
-                },
-                {
-                    "name": "PGID",
-                    "default": "!PGID",
-                    "label": "PGID"
-                },
-                {
-                    "name": "TZ",
-                    "default": "!TZ",
-                    "label": "TZ"
-                },
-                {
-                    "name": "SERVERURL",
-                    "default": "auto",
-                    "label": "SERVERURL",
-                    "description": "External IP or domain name for docker host. "
-                },
-                {
-                    "name": "SERVERPORT",
-                    "default": "51820",
-                    "label": "SERVERPORT",
-                    "description": " External port for docker host."
-                },
-                {
-                    "name": "PEERS",
-                    "default": "",
-                    "label": "PEERS",
-                    "description": "Number or list of names of peers to create confs for."
-                },
-                {
-                    "name": "INTERNAL_SUBNET",
-                    "default": "10.13.13.0",
-                    "description": " Internal subnet for the wireguard and server and peers (only change if it clashes).",
-                    "label": "INTERNAL_SUBNET"
-                }
-            ],
-            "labels": [
-                {
-                    "label": "swag",
-                    "value": "enable",
-                    "variable": ""
-                }
-            ],
-            "sysctls": [
-                {
-                    "net.ipv4.conf.all.src_valid_mark": "1"
-                }
-            ],
-            "cap_add": [
-                "NET_ADMIN",
-                "SYS_MODULE"
-            ],
-            "logo": "https://www.wireguard.com/favicon.ico",
-            "type": 1
+            "hostname": "themysteryshack",
+            "note": "<a href='https://containrrr.dev/watchtower'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "updates"
+            ]
         }
     ]
 }
