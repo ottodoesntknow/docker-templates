@@ -8,7 +8,7 @@ docker run -d --name=portainer \
   -p 9443:9443 \
   --net themysteryshack \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /var/lib/docker/volumes/config/portainer:/data \
+  -v /var/lib/docker/volumes/config/_data/portainer:/data \
   --restart always \
   portainer/portainer-ce:latest
 ```
