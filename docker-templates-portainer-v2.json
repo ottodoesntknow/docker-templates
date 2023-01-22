@@ -432,6 +432,89 @@
         },
         {
             "type": 1,
+            "title": "NSP Indexer",
+            "description": "PHP Indexer for Switch NSP (XCI NSZ XCZ) by proconsule and jangrewe",
+            "image": "ghcr.io/fpiesche/nspindexer:latest",
+            "name": "nspindexer",
+            "logo": "https://raw.githubusercontent.com/proconsule/nspindexer/dev/img/favicon.svg",
+            "env": [
+                {
+                    "name": "PUID",
+                    "label": "PUID",
+                    "default": "1000"
+                },
+                {
+                    "name": "PGID",
+                    "label": "PGID",
+                    "default": "1000"
+                },
+                {
+                    "name": "TZ",
+                    "label": "TZ",
+                    "default": "Europe/Madrid"
+                },
+                {
+                    "name": "UMASK",
+                    "label": "UMASK",
+                    "default": "002"
+                },
+                {
+                    "name": "PHP_MEMORY_LIMIT",
+                    "label": "PHP_MEMORY_LIMIT",
+                    "default": "512M"
+                },
+                {
+                    "name": "NSPINDEXER_GAMES_DIR",
+                    "label": "NSPINDEXER_GAMES_DIR",
+                    "default": "/var/www/html/games/collection"
+                },
+                {
+                    "name": "NSPINDEXER_CONTENT_URL",
+                    "label": "NSPINDEXER_CONTENT_URL",
+                    "default": "/games/collection"
+                },
+                {
+                    "name": "NSPINDEXER_KEYFILE",
+                    "label": "NSPINDEXER_KEYFILE",
+                    "default": "/var/www/html/prod.keys"
+                }
+            ],
+            "network": "themysteryshack",
+            "volumes": [
+                {
+                    "container": "/var/www/html/games"
+                },
+                {
+                    "container": "/var/www/html/prod.keys"
+                }
+            ],
+            "ports": [
+                "8002:80/tcp"
+            ],
+            "labels": [
+                {
+                    "name": "swag",
+                    "value": "enable"
+                },
+                {
+                    "name": "swag_auth",
+                    "value": "http"
+                },
+                {
+                    "name": "swag_port",
+                    "value": "80"
+                }
+            ],
+            "restart_policy": "unless-stopped",
+            "hostname": "themysteryshack",
+            "note": "<a href='https://github.com/proconsule/nspindexer'/>Official web</a>.",
+            "platform": "linux",
+            "categories": [
+                "games"
+            ]
+        },
+        {
+            "type": 1,
             "title": "Plex",
             "description": "Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.",
             "image": "cr.hotio.dev/hotio/plex:latest",
